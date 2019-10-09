@@ -16,11 +16,11 @@ import javax.swing.Action;
 public class VMain {
 
 	private JFrame ventanaMain;
-	private final Action actionHome = new SwingAction();
-	private final Action actionShop = new SwingAction_1();
-	private final Action actionAccount = new SwingAction_2();
-	private final Action actionHistory = new SwingAction_3();
-	private final Action actionPreferences = new SwingAction_4();
+	private final Action actionHome = new SwingActionHome();
+	private final Action actionShop = new SwingActionShop();
+	private final Action actionAccount = new SwingActionAccount();
+	private final Action actionHistory = new SwingActionHistory();
+	private final Action actionPreferences = new SwingActionPreferences();
 
 	/**
 	 * Launch the application.
@@ -76,7 +76,11 @@ public class VMain {
 		JButton bShop = new JButton("Shop");
 		bShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				JPanel pShop = new JPanel();
+				pShop.setBounds(0, 0, 360, 900);
+				ventanaMain.getContentPane().add(pShop);
+				pShop.setLayout(null);
+				System.out.println("pShop");
 			}
 		});
 		bShop.setAction(actionShop);
@@ -86,7 +90,11 @@ public class VMain {
 		JButton bAccount = new JButton("Account");
 		bAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				JPanel pAccount = new JPanel();
+				pAccount.setBounds(0, 0, 360, 900);
+				ventanaMain.getContentPane().add(pAccount);
+				pAccount.setLayout(null);
+				System.out.println("pAccount");
 			}
 		});
 		bAccount.setAction(actionAccount);
@@ -96,7 +104,11 @@ public class VMain {
 		JButton bHistory = new JButton("History");
 		bHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				JPanel pHistory = new JPanel();
+				pHistory.setBounds(0, 0, 360, 900);
+				ventanaMain.getContentPane().add(pHistory);
+				pHistory.setLayout(null);
+				System.out.println("pHistory");
 			}
 		});
 		bHistory.setAction(actionHistory);
@@ -106,47 +118,51 @@ public class VMain {
 		JButton bPreferences = new JButton("Preferences");
 		bPreferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				JPanel pPreferences = new JPanel();
+				pPreferences.setBounds(0, 0, 360, 900);
+				ventanaMain.getContentPane().add(pPreferences);
+				pPreferences.setLayout(null);
+				System.out.println("pPreferences");
 			}
 		});
 		bPreferences.setAction(actionPreferences);
 		bPreferences.setBounds(10, 630, 250, 50);
 		pBotonera.add(bPreferences);
 	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
+	private class SwingActionHome extends AbstractAction {
+		public SwingActionHome() {
 			putValue(NAME, "Home");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
 	}
-	private class SwingAction_1 extends AbstractAction {
-		public SwingAction_1() {
+	private class SwingActionShop extends AbstractAction {
+		public SwingActionShop() {
 			putValue(NAME, "Shop");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
 	}
-	private class SwingAction_2 extends AbstractAction {
-		public SwingAction_2() {
+	private class SwingActionAccount extends AbstractAction {
+		public SwingActionAccount() {
 			putValue(NAME, "Account");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
 	}
-	private class SwingAction_3 extends AbstractAction {
-		public SwingAction_3() {
+	private class SwingActionHistory extends AbstractAction {
+		public SwingActionHistory() {
 			putValue(NAME, "History");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
 	}
-	private class SwingAction_4 extends AbstractAction {
-		public SwingAction_4() {
+	private class SwingActionPreferences extends AbstractAction {
+		public SwingActionPreferences() {
 			putValue(NAME, "Preferences");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
