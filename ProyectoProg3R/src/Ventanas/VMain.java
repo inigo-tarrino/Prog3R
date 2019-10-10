@@ -15,7 +15,7 @@ import javax.swing.Action;
 
 public class VMain {
 
-	private JFrame ventanaMain;
+	JFrame ventanaMain;
 	private final Action actionHome = new SwingActionHome();
 	private final Action actionShop = new SwingActionShop();
 	private final Action actionAccount = new SwingActionAccount();

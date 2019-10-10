@@ -4,17 +4,21 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
-public class VLogin {
+public class VLogin extends JFrame{
 
 	private JFrame frame;
 	private JPasswordField passwordField;
 	private JTextField textField;
+	protected long i;
 
 	/**
 	 * Launch the application.
@@ -50,7 +54,7 @@ public class VLogin {
 		frame.getContentPane().setLayout(null);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds((frame.getWidth()/2)-125, 200, 250, 40);
+		passwordField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 200, (frame.getWidth()/2), 40);
 	//	passwordField.setBounds(x, y, width, height);
 		frame.getContentPane().add(passwordField);
 		
@@ -59,7 +63,7 @@ public class VLogin {
 		frame.getContentPane().add(LPassword);
 		
 		textField = new JTextField();
-		textField.setBounds((frame.getWidth()/2)-125, 98, 250, 40);
+		textField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 98, (frame.getWidth()/2), 40);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -71,12 +75,44 @@ public class VLogin {
 		BLogin.setBounds((frame.getWidth()/2)-125, 279, 110, 25);
 		frame.getContentPane().add(BLogin);
 		
+		BLogin.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println("Login");
+				frame.dispose();
+				VMain window = new VMain();
+				window.ventanaMain.setVisible(true);
+			}
+		}
+		);
+		
+		JProgressBar barra = new JProgressBar();
+		barra.setBounds(0, 330, 578, 14);
+		frame.getContentPane().add(barra);
+		
 		JButton BSignup = new JButton("SignUp");
 		BSignup.setBounds((frame.getWidth()/2)+15, 279, 110, 25);
 		frame.getContentPane().add(BSignup);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(0, 330, 578, 14);
-		frame.getContentPane().add(progressBar);
+		BSignup.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+				{
+					System.out.println("Signup");
+					frame.dispose();
+					VentanaSignUp window = new VentanaSignUp();
+					window.frame.setVisible(true);	
+				}
+				
+		
+		});
+		
 	}
 }

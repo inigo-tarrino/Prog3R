@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 public class VentanaSignUp {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField TFnn;
 	private JTextField TFpass;
 	private JTextField TFemail;
