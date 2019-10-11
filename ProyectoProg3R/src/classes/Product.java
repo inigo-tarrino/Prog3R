@@ -1,5 +1,6 @@
 package classes;
 
-public class Product {
+public abstract class Product {
 
+	
 }

@@ -5,18 +5,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
+import javax.swing.JPasswordField;
 
 public class VentanaSignUp {
 
 	JFrame frame;
 	private JTextField TFnn;
-	private JTextField TFpass;
+	private JPasswordField TFpass;
 	private JTextField TFemail;
 
 	
@@ -72,7 +75,7 @@ public class VentanaSignUp {
 		panel.add(TFnn);
 		TFnn.setColumns(10);
 		
-		TFpass = new JTextField();
+		TFpass = new JPasswordField();
 		TFpass.setColumns(10);
 		TFpass.setBounds(223, 157, 105, 27);
 		panel.add(TFpass);
@@ -90,8 +93,15 @@ public class VentanaSignUp {
 		btnSU.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				validateNickName(TFnn, "Please enter a nickname");
+				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
+				validateEmail(TFemail);
+				frame.dispose();
+				VMain vM = new VMain();
+				vM.ventanaMain.setVisible(true);
 			}
+
+			
 		});
 		
 		JCheckBox chckbxAdmin = new JCheckBox("Admin");
@@ -109,9 +119,42 @@ public class VentanaSignUp {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				frame.dispose();
+				VLogin vL = new VLogin();
+				vL.frame.setVisible(true);
+				
 				
 			}
 		});
+	}
+	
+	public boolean validateNickName(JTextField TFnn, String errormsg){
+	  if (TFnn.getText().equals("")) {
+		  return failedMessage( TFnn, errormsg );
+	  }else {
+		  return true;
+	  }  
+	}
+	
+	public boolean validatePassword(JTextField TFpass, String errormsg){
+	  if (TFpass.getText().equals("") || TFpass.getText().length() < 8) {
+		  return failedMessage( TFpass, errormsg );
+	  }else {
+		  return true; 
+	  }  
+	}
+
+	private void validateEmail(JTextField TFemail) {
+		String regex = "^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$";
+		if (Pattern.matches(regex, TFemail.getText())) {
+		}else{
+		  failedMessage(TFemail, "Please enter a valir email.");
+		}
+	}
+
+	private boolean failedMessage(JTextField f, String errormsg) {
+		JOptionPane.showMessageDialog(null, errormsg); 
+		f.requestFocus();
+		return false;
 	}
 }

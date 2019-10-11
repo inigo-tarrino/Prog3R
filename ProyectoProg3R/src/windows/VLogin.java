@@ -15,7 +15,7 @@ import javax.swing.JProgressBar;
 
 public class VLogin extends JFrame{
 
-	private JFrame frame;
+	JFrame frame;
 	private JPasswordField passwordField;
 	private JTextField textField;
 	protected long i;
