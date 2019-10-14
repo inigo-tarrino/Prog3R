@@ -1,6 +1,7 @@
 package Ventanas;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
@@ -15,7 +16,7 @@ import javax.swing.JProgressBar;
 
 public class VLogin extends JFrame{
 
-	private JFrame frame;
+	JFrame frame;
 	private JPasswordField passwordField;
 	private JTextField textField;
 	protected long i;
@@ -59,7 +60,8 @@ public class VLogin extends JFrame{
 		frame.getContentPane().add(passwordField);
 		
 		JLabel LPassword = new JLabel("Password");
-		LPassword.setBounds((frame.getWidth()/2)-30, 154, 100, 40);
+		LPassword.setFont(new Font("Times", Font.PLAIN, 20));
+		LPassword.setBounds((frame.getWidth()/2)-40, 154, 100, 40);
 		frame.getContentPane().add(LPassword);
 		
 		textField = new JTextField();

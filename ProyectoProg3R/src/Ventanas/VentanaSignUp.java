@@ -105,13 +105,18 @@ public class VentanaSignUp {
 		btnBack.setBounds(24, 350, 120, 33);
 		btnBack.setFocusPainted(false);
 		panel.add(btnBack);
-		btnBack.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+		
+		btnBack.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+				{
+					System.out.println("Signup");
+					frame.dispose();
+					VLogin window = new VLogin();
+					window.frame.setVisible(true);	
+				}
 				
-			}
+		
 		});
 	}
 }
