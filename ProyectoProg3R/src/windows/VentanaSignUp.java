@@ -8,19 +8,26 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import classes.Functions;
+import classes.User;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.JPasswordField;
 
 public class VentanaSignUp {
 
 	JFrame frame;
+	JButton btnSU;
 	private JTextField TFnn;
 	private JPasswordField TFpass;
 	private JTextField TFemail;
+	private ArrayList<User> userList;
 
 	
 	public static void main(String[] args) {
@@ -85,17 +92,19 @@ public class VentanaSignUp {
 		TFemail.setBounds(223, 238, 105, 27);
 		panel.add(TFemail);
 		
-		JButton btnSU = new JButton("SIGN UP");
+		btnSU = new JButton("SIGN UP");
 		btnSU.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		btnSU.setBounds(293, 350, 120, 33);
 		btnSU.setFocusPainted(false);
 		panel.add(btnSU);
+		userList = new ArrayList<>();
 		btnSU.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				validateNickName(TFnn, "Please enter a nickname");
 				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
 				validateEmail(TFemail);
+				Functions.addUser(userList);
 				frame.dispose();
 				VMain vM = new VMain();
 				vM.ventanaMain.setVisible(true);
