@@ -6,7 +6,7 @@ public abstract class Product {
 	protected String name;
 	protected double prize;
 	protected String desc;
-	protected int mark;
+	protected int mark; //NOTA: del 0 al 5
 	
 	public Product()
 	{
