@@ -66,11 +66,11 @@ public class VMain {
 				pHome.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pHome);
 				pHome.setLayout(null);
-				System.out.println("pHome");
 			}
 		});
 		bHome.setAction(actionHome);
 		bHome.setBounds(10, 10, 250, 50);
+		bHome.setFocusPainted(false);
 		pBotonera.add(bHome);
 		
 		JButton bShop = new JButton("Shop");
@@ -80,11 +80,11 @@ public class VMain {
 				pShop.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pShop);
 				pShop.setLayout(null);
-				System.out.println("pShop");
 			}
 		});
 		bShop.setAction(actionShop);
 		bShop.setBounds(10, 70, 250, 50);
+		bShop.setFocusPainted(false);
 		pBotonera.add(bShop);
 		
 		JButton bAccount = new JButton("Account");
@@ -94,11 +94,13 @@ public class VMain {
 				pAccount.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pAccount);
 				pAccount.setLayout(null);
-				System.out.println("pAccount");
+				VProfile vP = new VProfile();
+				vP.frame.setVisible(true);
 			}
 		});
 		bAccount.setAction(actionAccount);
 		bAccount.setBounds(10, 510, 250, 50);
+		bAccount.setFocusPainted(false);
 		pBotonera.add(bAccount);
 		
 		JButton bHistory = new JButton("History");
@@ -108,11 +110,11 @@ public class VMain {
 				pHistory.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pHistory);
 				pHistory.setLayout(null);
-				System.out.println("pHistory");
 			}
 		});
 		bHistory.setAction(actionHistory);
 		bHistory.setBounds(10, 570, 250, 50);
+		bHistory.setFocusPainted(false);
 		pBotonera.add(bHistory);
 		
 		JButton bPreferences = new JButton("Preferences");
@@ -122,11 +124,11 @@ public class VMain {
 				pPreferences.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pPreferences);
 				pPreferences.setLayout(null);
-				System.out.println("pPreferences");
 			}
 		});
 		bPreferences.setAction(actionPreferences);
 		bPreferences.setBounds(10, 630, 250, 50);
+		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
 	}
 	private class SwingActionHome extends AbstractAction {
