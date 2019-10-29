@@ -5,7 +5,7 @@ public class User {
 	String pass;
 	String email;
 	String address;
-	boolean isAdmin;
+	static boolean isAdmin;
 	
 	public User(String nickName, String pass, String email, String address, boolean isAdmin) {
 		this.nickName = nickName;

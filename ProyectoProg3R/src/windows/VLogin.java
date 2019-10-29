@@ -107,7 +107,7 @@ public class VLogin extends JFrame{
 				{
 					System.out.println("Signup");
 					frame.dispose();
-					VentanaSignUp window = new VentanaSignUp();
+			    	VentanaSignUp window = new VentanaSignUp();
 					window.frame.setVisible(true);	
 				}
 				
