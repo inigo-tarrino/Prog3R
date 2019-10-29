@@ -80,7 +80,7 @@ public class VLogin extends JFrame{
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(100);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
