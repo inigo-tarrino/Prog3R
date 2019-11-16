@@ -8,7 +8,7 @@ public class Functions {
 
 	public static void addUser(ArrayList<User> userList) {
 		//Este user luego hay que cambiarlo y coger cada columna de users de la BD.
-		User user = new User("e", "1234", "enekovalero@gmail.com", "Barakaldo", true);
+		User user = new User("e", "1234", "enekovalero@gmail.com", "Barakaldo", true, null);
 		for (int i = 0; i <= userList.size(); i++) {
 			userList.add(user);
 			System.out.println(userList.get(i).getNickName());

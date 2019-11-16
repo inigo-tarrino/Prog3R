@@ -5,14 +5,17 @@ public class User {
 	String pass;
 	String email;
 	String address;
+	String CreditCard;
 	static boolean isAdmin;
 	
-	public User(String nickName, String pass, String email, String address, boolean isAdmin) {
+	public User(String nickName, String pass, String email, String address, boolean isAdmin,String CreditCard)
+	{
 		this.nickName = nickName;
 		this.pass = pass;
 		this.email = email;
 		this.address = address;
 		this.isAdmin = isAdmin;
+		this.CreditCard = CreditCard;
 	}
 	public String getNickName() {
 		return nickName;
@@ -43,6 +46,12 @@ public class User {
 	}
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public String getCreditCard() {
+		return CreditCard;
+	}
+	public void setCreditCard(String creditCard) {
+		CreditCard = creditCard;
 	}
 	
 	
