@@ -28,7 +28,7 @@ public class RegisterUser
 			
 		}catch(Exception e)
 		{
-			
+			System.out.println("Error al registrarse");
 		}
 	}
 	
