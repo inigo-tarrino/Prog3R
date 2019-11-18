@@ -1,42 +1,34 @@
 package classes;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Functions {
 
 	private static Scanner sc;
+	private static Map<String, User> usersList;
+	User newUser = null;
 
-	public static void addUser(ArrayList<User> userList) {
-		//Este user luego hay que cambiarlo y coger cada columna de users de la BD.
-		User user = new User("e", "1234", "enekovalero@gmail.com", "Barakaldo", true);
-		for (int i = 0; i <= userList.size(); i++) {
-			userList.add(user);
-			System.out.println(userList.get(i).getNickName());
-		}
-			
-		
+	public static void addUser(User newUser) {
+		usersList.put(newUser.getNickName(), newUser);
 	}
 	
-	/*public static void deleteUser(ArrayList<User> userList) {
-		if(!userList.isEmpty()) {
-			for (User u : userList) {
-				userList.remove(u);
-			}
-		}
-	}*/
+	public Map<String, User> getUsersList() throws IOException{
+		return Functions.usersList;
+	}
 	
-	public static void main(String[] args) {
-		ArrayList<User> userList = new ArrayList<>();
-
+	public static void main(String[] args) throws IOException {
 		ArrayList<Product> ProdList = new ArrayList<>();
-	//	addUser(userList);
-		
 		addItem(ProdList);
+		Map<String, User> usersList1 = new Functions().getUsersList();
+		for (int i = 0; i < usersList1.size(); i++) {
+			System.out.println(usersList1.get(i).getNickName());
+		}
 	}
 	
 	public static void addItem(ArrayList<Product> ProdList) 
 	{
-	
 		if(true)//User.isAdmin == true ) //Add this when database is implemented
 		{
 			sc = new Scanner(System.in);

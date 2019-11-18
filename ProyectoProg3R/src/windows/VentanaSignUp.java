@@ -104,7 +104,7 @@ public class VentanaSignUp {
 				validateNickName(TFnn, "Please enter a nickname");
 				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
 				validateEmail(TFemail);
-				Functions.addUser(userList);
+				//Functions.addUser(userList);
 				frame.dispose();
 				VMain vM = new VMain();
 				vM.ventanaMain.setVisible(true);

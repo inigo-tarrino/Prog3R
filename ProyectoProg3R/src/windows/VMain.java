@@ -51,6 +51,7 @@ public class VMain {
 	 */
 	private void initialize() {
 		ventanaMain = new JFrame();
+		ventanaMain.setResizable(false);
 		ventanaMain.setBounds(100, 100, 1280, 720);
 		ventanaMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventanaMain.getContentPane().setLayout(null);
