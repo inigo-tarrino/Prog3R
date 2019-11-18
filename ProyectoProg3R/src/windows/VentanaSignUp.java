@@ -24,10 +24,10 @@ public class VentanaSignUp {
 
 	JFrame frame;
 	JButton btnSU;
-	private JTextField TFnn;
-	private JPasswordField TFpass;
-	private JTextField TFemail;
-	private ArrayList<User> userList;
+	public static JTextField TFnn;
+	public static JPasswordField TFpass;
+	public static JTextField TFemail;
+	protected ArrayList<User> userList;
 
 	
 	public static void main(String[] args) {
@@ -166,4 +166,5 @@ public class VentanaSignUp {
 		f.requestFocus();
 		return false;
 	}
+	
 }

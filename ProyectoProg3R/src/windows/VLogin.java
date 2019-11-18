@@ -52,6 +52,7 @@ public class VLogin extends JFrame{
 		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(true);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 200, (frame.getWidth()/2), 40);
@@ -80,7 +81,7 @@ public class VLogin extends JFrame{
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(100);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
