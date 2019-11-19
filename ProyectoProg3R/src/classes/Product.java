@@ -4,7 +4,7 @@ public abstract class Product {
 	
 	protected int id;
 	protected String name;
-	protected double prize;
+	protected double price;
 	protected String desc;
 	protected int mark; //NOTA: del 0 al 5
 	
@@ -12,16 +12,17 @@ public abstract class Product {
 	{
 		this.id = 0;
 		this.name = " ";
-		this.prize = 0.0;
+		this.price = 0.0;
 		this.desc = null;
 		this.mark = 0;
 	}
+	
 	
 	public Product(int id, String name, double prize, String desc, int mark)
 	{
 		this.id = id;
 		this.name = name;
-		this.prize = prize;
+		this.price = prize;
 		this.desc = desc;
 		this.mark = mark;
 	}
@@ -48,12 +49,12 @@ public abstract class Product {
 
 	public double getPrize() 
 	{
-		return prize;
+		return price;
 	}
 
 	public void setPrize(double prize) 
 	{
-		this.prize = prize;
+		this.price = prize;
 	}
 
 	public String getDesc()
