@@ -7,14 +7,15 @@ import windows.*;
 public class RegisterUser
 {
 	//Conection with ddbb
-	Connect cct= new Connect();
-	Connection conn = cct.conect();
+	static Connect cct= new Connect();
+	static Connection conn = cct.conect();
 	
-	public void addUser() 
+	public static void addUser() 
 	{
-		String SQL = "INSERT INTO user(Nickname,Password,Email,Adress,CreditCard) VALUES(?,?,?,?,?)";
+		String SQL = "INSERT INTO User(Nickname,Password,Email,Adress,CreditCard) VALUES(?,?,?,?,?)";
 		try 
 		{
+			System.out.println("Launching data saver");
 			PreparedStatement psn = conn.prepareStatement(SQL); //NickName
 			psn.setString(1, windows.VentanaSignUp.TFnn.getText());
 			PreparedStatement psp = conn.prepareStatement(SQL); //Password
@@ -28,6 +29,7 @@ public class RegisterUser
 			
 		}catch(Exception e)
 		{
+			System.out.println(e);
 			System.out.println("Error al registrarse");
 		}
 	}

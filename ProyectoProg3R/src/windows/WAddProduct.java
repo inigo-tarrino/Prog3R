@@ -15,9 +15,9 @@ public class WAddProduct {
 
 	private JFrame frame;
 	private final JLabel lName = new JLabel("Name");
-	private JTextField tFName;
-	private JTextField tFPrice;
-	private JTextField tFDesc;
+	public static JTextField tFName;
+	public static JTextField tFPrice;
+	public static JTextField tFDesc;
 
 	/**
 	 * Launch the application.
@@ -45,7 +45,7 @@ public class WAddProduct {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	protected void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Add Product");
 		frame.setBounds(100, 100, 320, 444);
@@ -60,7 +60,7 @@ public class WAddProduct {
 		lPrice.setBounds(10, 162, 58, 25);
 		frame.getContentPane().add(lPrice);
 		
-		JLabel lDesc = new JLabel("Description");
+		JLabel lDesc = new JLabel("Type");
 		lDesc.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lDesc.setBounds(10, 240, 80, 25);
 		frame.getContentPane().add(lDesc);

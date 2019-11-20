@@ -16,7 +16,7 @@ public class Connect {
 	{
 		try {
 			Class.forName("org.sqlite.JDBC");	
-			conn= DriverManager.getConnection("jdbc:sqlite:Database/SecuoiaDB.db");
+			conn= DriverManager.getConnection("jdbc:sqlite:Database/SecuoiaDDBB");
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Invalid credentials");

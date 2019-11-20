@@ -5,8 +5,9 @@ public class User {
 	String pass;
 	String email;
 	String address;
-	String CreditCard;
 	static boolean isAdmin;
+	String CreditCard;
+	
 	
 	public User(String nickName, String pass, String email, String address, boolean isAdmin,String CreditCard)
 	{

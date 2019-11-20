@@ -1,6 +1,7 @@
 package windows;
 
 import java.awt.Dimension;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 
 import classes.Functions;
 import classes.User;
+import ddbb.*;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -104,7 +106,7 @@ public class VentanaSignUp {
 				validateNickName(TFnn, "Please enter a nickname");
 				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
 				validateEmail(TFemail);
-				//Functions.addUser(userList);
+				ddbb.RegisterUser.addUser();
 				frame.dispose();
 				VMain vM = new VMain();
 				vM.ventanaMain.setVisible(true);
