@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JTable;
+
+import classes.User;
 import ddbbcon.connect;
 import net.proteanit.sql.DbUtils;
 
@@ -28,6 +30,7 @@ public class VMain {
 	private final Action actionHistory = new SwingActionHistory();
 	private final Action actionPreferences = new SwingActionPreferences();
 	private JTable table;
+	private User usuario;
 
 	/**
 	 * Launch the application.
@@ -50,7 +53,8 @@ public class VMain {
 	/**
 	 * Create the application.
 	 */
-	public VMain() {
+	public VMain(User us) {
+		this.usuario = us;
 		initialize();
 		conn = cct.conect();
 	}
@@ -118,7 +122,7 @@ public class VMain {
 				pAccount.setBounds(0, 0, 360, 900);
 				ventanaMain.getContentPane().add(pAccount);
 				pAccount.setLayout(null);
-				VProfile vP = new VProfile();
+				VProfile vP = new VProfile(usuario);
 				vP.frame.setVisible(true);
 			}
 		});

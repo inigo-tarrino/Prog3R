@@ -88,8 +88,8 @@ public class VLogin extends JFrame{
 				}
 				System.out.println("Login");
 				frame.dispose();
-				VMain window = new VMain();
-				window.ventanaMain.setVisible(true);
+				//VMain window = new VMain();
+				//window.ventanaMain.setVisible(true);
 			}
 		}
 		);

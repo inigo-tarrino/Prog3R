@@ -12,29 +12,20 @@ public class RegisterUser
 	static connect cct= new connect();
 	static Connection conn = cct.conect();
 	
+	
 	public static void addUser(User u) 
 	{
 		String nick = u.getNickName();
+		String pass = u.getPass();
+		String email = u.getEmail();
 		
-		String SQL = "INSERT INTO User(Nickname,Password,Email,Adress,CreditCard) VALUES(?,?,?,?,?)";
-		try 
-		{
-			System.out.println("Launching data saver");
-			PreparedStatement psn = conn.prepareStatement(SQL); //NickName
-			psn.setString(1, windows.VentanaSignUp.TFnn.getText());
-			PreparedStatement psp = conn.prepareStatement(SQL); //Password
-			psp.setString(2, windows.VentanaSignUp.TFpass.getName());
-			PreparedStatement pse = conn.prepareStatement(SQL); //Email
-			pse.setString(3, windows.VentanaSignUp.TFemail.getText());
-			PreparedStatement psa = conn.prepareStatement(SQL); //Adress
-			psa.setString(4, null);
-			PreparedStatement pscc = conn.prepareStatement(SQL); //CreditCard
-			pscc.setString(5, null);
-			
-		}catch(Exception e)
-		{
+		String SQL = "INSERT INTO user (NickName, Password, Email) VALUES ('" + nick + "','" + pass + "','" + email + "')";
+		try {
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(SQL);
+		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error al registrarse");
+			e.printStackTrace();
 		}
 	}
 	

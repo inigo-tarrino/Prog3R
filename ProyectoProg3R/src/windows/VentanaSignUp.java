@@ -111,7 +111,7 @@ public class VentanaSignUp {
 				User u = new User(TFnn.getText(), TFpass.getText(), TFemail.getText(), chckbxAdmin.isSelected());
 				ddbb.RegisterUser.addUser(u);
 				frame.dispose();
-				VMain vM = new VMain();
+				VMain vM = new VMain(u);
 				vM.ventanaMain.setVisible(true);
 			}
 

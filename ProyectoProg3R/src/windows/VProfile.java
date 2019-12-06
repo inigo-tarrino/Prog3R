@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import classes.User;
 import ddbbcon.connect;
 
 import java.awt.BorderLayout;
@@ -31,6 +32,7 @@ public class VProfile extends JFrame {
 	private JLabel Nick, e_mail, address, Nick_txt, e_mail_txt, address_txt;
 	private JLabelProfile JLP;
 	Connection conn;
+	private User usuario;
 
 	/**
 	 * 1.- Launch the application.
@@ -39,7 +41,8 @@ public class VProfile extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VProfile window = new VProfile();
+					User u = new User("prueba", "1", "eeee", false);
+					VProfile window = new VProfile(u);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +54,8 @@ public class VProfile extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public VProfile() {
+	public VProfile(User usu) {
+		this.usuario = usu;
 		initialize();
 	}
 
@@ -73,11 +77,11 @@ public class VProfile extends JFrame {
 		Nick = new JLabel("NickName: ");
 		e_mail = new JLabel("E-mail: ");
 		address = new JLabel("Address: ");
-		Nick_txt = new JLabel();
+		Nick_txt = new JLabel(usuario.getNickName());
 		Nick_txt.setBorder( BorderFactory.createLineBorder(Color.BLACK));
-		e_mail_txt = new JLabel();
+		e_mail_txt = new JLabel(usuario.getEmail());
 		e_mail_txt.setBorder( BorderFactory.createLineBorder(Color.BLACK));
-		address_txt = new JLabel();
+		address_txt = new JLabel(usuario.getAddress());
 		address_txt.setBorder( BorderFactory.createLineBorder(Color.BLACK));
 		
 		panel_labels.add(Nick);
