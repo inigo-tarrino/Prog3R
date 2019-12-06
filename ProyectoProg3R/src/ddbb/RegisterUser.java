@@ -1,19 +1,26 @@
 package ddbb;
 
 import java.sql.*;
+<<<<<<< HEAD
 import java.util.Scanner;
 
+=======
+
+import classes.User;
+>>>>>>> branch 'master' of https://github.com/inigo-tarrino/Prog3R.git
 import ddbbcon.*;
 import windows.*;
 
 public class RegisterUser
 {
 	//Conection with ddbb
-	static Connect cct= new Connect();
+	static connect cct= new connect();
 	static Connection conn = cct.conect();
 	
-	public static void addUser() 
+	public static void addUser(User u) 
 	{
+		String nick = u.getNickName();
+		
 		String SQL = "INSERT INTO User(Nickname,Password,Email,Adress,CreditCard) VALUES(?,?,?,?,?)";
 		try 
 		{

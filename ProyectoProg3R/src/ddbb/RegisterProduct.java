@@ -3,7 +3,7 @@ package ddbb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import ddbbcon.Connect;
+import ddbbcon.connect;
 
 import windows.*;
 
@@ -11,7 +11,7 @@ public class RegisterProduct
 {
 
 	//Conection with ddbb
-	Connect cct= new Connect();
+	connect cct= new connect();
 	Connection conn = cct.conect();
 	public void addProduct() 
 	{

@@ -11,11 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import ddbbcon.connect;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class VProfile extends JFrame {
 
@@ -23,6 +30,7 @@ public class VProfile extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel Nick, e_mail, address, Nick_txt, e_mail_txt, address_txt;
 	private JLabelProfile JLP;
+	Connection conn;
 
 	/**
 	 * 1.- Launch the application.
@@ -130,5 +138,14 @@ public class VProfile extends JFrame {
 		Image newImg = img.getScaledInstance(JLP.getWidth(), JLP.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon image = new ImageIcon(newImg);
 		return image;
+	}
+	public void showData() throws SQLException, ClassNotFoundException{
+		String sql = "SELECT NickName, Email FROM user WHERE NickName=? AND Email=?;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			stmt.setString(1, VentanaSignUp.TFnn.getText());
+			stmt.setString(2, VentanaSignUp.TFemail.getText());
+		}
 	}
 }

@@ -18,6 +18,12 @@ public class User {
 		this.isAdmin = isAdmin;
 		this.CreditCard = CreditCard;
 	}
+	public User(String nickName, String pass, String email, boolean isAdmin) {
+		this.nickName = nickName;
+		this.pass = pass;
+		this.email = email;
+		this.isAdmin = isAdmin;
+	}
 	public String getNickName() {
 		return nickName;
 	}
