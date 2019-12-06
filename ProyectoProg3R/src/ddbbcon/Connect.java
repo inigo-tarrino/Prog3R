@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import java.awt.Transparency;
 import java.sql.Connection;
 
-public class connect {
+public class Connect {
 
 	private Connection conn = null;
 	
@@ -23,5 +23,7 @@ public class connect {
 		}
 		return conn;
 		
+	
 	}
+
 }

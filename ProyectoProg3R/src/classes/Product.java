@@ -76,8 +76,5 @@ public abstract class Product {
 	{
 		this.mark = mark;
 	}
-	
-	
-
-	
+	 
 }

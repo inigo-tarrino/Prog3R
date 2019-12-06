@@ -15,7 +15,7 @@ import javax.swing.Action;
 import javax.swing.JTable;
 
 import classes.User;
-import ddbbcon.connect;
+import ddbbcon.Connect;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -48,7 +48,7 @@ public class VMain {
 	}
 	 */
 
-	connect cct= new connect();
+	Connect cct= new Connect();
 	Connection conn = null;
 	/**
 	 * Create the application.

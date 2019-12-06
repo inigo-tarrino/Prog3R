@@ -11,10 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import classes.User;
-import ddbbcon.connect;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;

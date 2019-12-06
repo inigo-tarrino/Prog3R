@@ -1,5 +1,6 @@
 package classes;
 
-public class Purchase {
+public class Purchase 
+{
 
 }

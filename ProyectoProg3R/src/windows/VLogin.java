@@ -1,14 +1,22 @@
 package windows;
 
 import java.awt.EventQueue;
+import ddbbcon.Connect;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
@@ -20,6 +28,8 @@ public class VLogin extends JFrame{
 	private JTextField textField;
 	protected long i;
 
+	static Connect cct= new Connect();
+	static Connection conn = cct.conect();
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +63,39 @@ public class VLogin extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(true);
+		/* Por si la ventana peta para comprobar el login a la app y que los comprueba con la bd
+		Scanner s = new Scanner(System.in);
+		System.out.println("Usuario: ");//admin
+		String NickName = s.nextLine();
 		
+		System.out.println("Contraseña: ");//adminadmin
+		String password = s.nextLine();
+		s.close();
+		try {
+		conn= DriverManager.getConnection("jdbc:sqlite:Database/SecuoiaDDBB.db");
+		PreparedStatement stmt2 = conn.prepareStatement("SELECT Nickname FROM User WHERE Nickname=? AND Password = ?");
+		//PreparedStatement psn = conn.prepareStatement(null); //NickName
+		stmt2.setString(1, NickName);
+		stmt2.setString(2, password);
+
+		
+		ResultSet rs =stmt2.executeQuery();
+		if(rs.next()) 
+		{
+			System.out.println("Login OK");
+			System.out.println("Login");
+			frame.dispose();
+			VMain window = new VMain();
+			window.ventanaMain.setVisible(true);
+		} else 
+		{
+			System.out.println("Error");
+		}
+		}catch(Exception f) 
+		{
+			System.out.println("Disconected");
+		}
+		 	*/
 		passwordField = new JPasswordField();
 		passwordField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 200, (frame.getWidth()/2), 40);
 	//	passwordField.setBounds(x, y, width, height);
@@ -80,16 +122,7 @@ public class VLogin extends JFrame{
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println("Login");
-				frame.dispose();
-				//VMain window = new VMain();
-				//window.ventanaMain.setVisible(true);
+			
 			}
 		}
 		);
