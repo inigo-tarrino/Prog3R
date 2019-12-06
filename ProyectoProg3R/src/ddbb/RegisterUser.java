@@ -1,13 +1,10 @@
 package ddbb;
 
 import java.sql.*;
-<<<<<<< HEAD
 import java.util.Scanner;
 
-=======
 
 import classes.User;
->>>>>>> branch 'master' of https://github.com/inigo-tarrino/Prog3R.git
 import ddbbcon.*;
 import windows.*;
 
