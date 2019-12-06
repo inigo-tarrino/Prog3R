@@ -7,7 +7,7 @@ import windows.*;
 public class RegisterUser
 {
 	//Conection with ddbb
-	static Connect cct= new Connect();
+	static connect cct= new connect();
 	static Connection conn = cct.conect();
 	
 	public static void addUser() 
