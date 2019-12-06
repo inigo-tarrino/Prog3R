@@ -30,6 +30,7 @@ public class VentanaSignUp {
 	public static JPasswordField TFpass;
 	public static JTextField TFemail;
 	protected ArrayList<User> userList;
+	public JCheckBox chckbxAdmin;
 
 	
 	public static void main(String[] args) {
@@ -106,7 +107,9 @@ public class VentanaSignUp {
 				validateNickName(TFnn, "Please enter a nickname");
 				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
 				validateEmail(TFemail);
-				ddbb.RegisterUser.addUser();
+				@SuppressWarnings("deprecation")
+				User u = new User(TFnn.getText(), TFpass.getText(), TFemail.getText(), chckbxAdmin.isSelected());
+				ddbb.RegisterUser.addUser(u);
 				frame.dispose();
 				VMain vM = new VMain();
 				vM.ventanaMain.setVisible(true);
@@ -115,7 +118,7 @@ public class VentanaSignUp {
 			
 		});
 		
-		JCheckBox chckbxAdmin = new JCheckBox("Admin");
+		chckbxAdmin = new JCheckBox("Admin");
 		chckbxAdmin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxAdmin.setBounds(155, 298, 105, 27);
 		chckbxAdmin.setFocusPainted(false);
