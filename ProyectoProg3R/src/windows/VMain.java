@@ -12,6 +12,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JTable;
+import ddbbcon.connect;
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.JScrollPane;
+import java.sql.*;
 
 public class VMain {
 
@@ -21,10 +27,11 @@ public class VMain {
 	private final Action actionAccount = new SwingActionAccount();
 	private final Action actionHistory = new SwingActionHistory();
 	private final Action actionPreferences = new SwingActionPreferences();
+	private JTable table;
 
 	/**
 	 * Launch the application.
-	 * 	public static void main(String[] args) {
+	 public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,12 +45,14 @@ public class VMain {
 	}
 	 */
 
-
+	connect cct= new connect();
+	Connection conn = null;
 	/**
 	 * Create the application.
 	 */
 	public VMain() {
 		initialize();
+		conn = cct.conect();
 	}
 
 	/**
@@ -78,10 +87,23 @@ public class VMain {
 		JButton bShop = new JButton("Shop");
 		bShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JPanel pShop = new JPanel();
-				pShop.setBounds(0, 0, 360, 900);
-				ventanaMain.getContentPane().add(pShop);
-				pShop.setLayout(null);
+//				JPanel pShop = new JPanel();
+//				pShop.setBounds(0, 0, 360, 900);
+//				ventanaMain.getContentPane().add(pShop);
+//				pShop.setLayout(null);
+				
+				try {
+					String query = "SELECT * FROM product";
+					PreparedStatement pst = conn.prepareStatement(query);
+					ResultSet rs = pst.executeQuery();
+					
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		bShop.setAction(actionShop);
@@ -132,6 +154,13 @@ public class VMain {
 		bPreferences.setBounds(10, 630, 250, 50);
 		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
+		
+		JScrollPane scrollShop = new JScrollPane();
+		scrollShop.setBounds(372, 36, 884, 581);
+		ventanaMain.getContentPane().add(scrollShop);
+		
+		table = new JTable();
+		scrollShop.setViewportView(table);
 	}
 	private class SwingActionHome extends AbstractAction {
 		public SwingActionHome() {
