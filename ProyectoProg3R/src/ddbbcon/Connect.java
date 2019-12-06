@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import classes.User;
+import ddbb.RegisterUser;
+
 import java.awt.Transparency;
 import java.sql.Connection;
 

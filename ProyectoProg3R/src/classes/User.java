@@ -24,6 +24,11 @@ public class User {
 		this.email = email;
 		this.isAdmin = isAdmin;
 	}
+	
+	public User(String nickName, String pass) {
+		this.nickName = nickName;
+		this.pass = pass;
+	}
 	public String getNickName() {
 		return nickName;
 	}

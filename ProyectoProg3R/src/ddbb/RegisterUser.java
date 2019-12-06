@@ -21,14 +21,74 @@ public class RegisterUser
 		String pass = u.getPass();
 		String email = u.getEmail();
 		
-		String SQL = "INSERT INTO user (NickName, Password, Email) VALUES ('" + nick + "','" + pass + "','" + email + "')";
 		try {
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(SQL);
+		int ad;
+		if(!u.isAdmin()){
+			ad = 0;
+		}else {
+			ad = 1;
+		}
+		Statement stmt = conn.createStatement();
+		String SQL = "INSERT INTO user (NickName, Password, Email, Admin) VALUES ('" + nick + "','" + pass + "','" + email + "','" + ad + "')";
+		stmt.executeUpdate(SQL);
 		} catch (Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean searchUser(User u) {
+		String SQL = "SELECT * FROM user";
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL);
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+				if (u.getNickName().equals(rs.getString("Nickname"))) {
+					System.out.println("User exists");
+					if (u.getPass().equals(rs.getString("Password"))) {
+						System.out.println("Password correct");
+						return true;
+					}else {
+						System.out.println("password incorrect");
+						return false;
+					}
+				}else {
+					System.out.println("User does not exist");
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
+	public static User completeUser(User user) {
+		String SQL = "SELECT * FROM user";
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL);
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+				if (user.getNickName().equals(rs.getString("Nickname"))) {
+					System.out.println("User exists");
+					if (user.getPass().equals(rs.getString("Password"))) {
+						System.out.println("Password correct");
+						user.setEmail(rs.getString("Email"));
+						user.setAddress(rs.getString("Adress"));
+						user.setCreditCard(rs.getString("CreditCard"));
+						return user;
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return user;
 	}
 	public static void verify() throws SQLException 
 	{

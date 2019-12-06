@@ -12,20 +12,25 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import classes.User;
+import ddbb.RegisterUser;
+
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
 public class VLogin extends JFrame{
 
 	JFrame frame;
-	private JPasswordField passwordField;
-	private JTextField textField;
+	private JTextField loginF;
+	private JPasswordField passF;
 	protected long i;
 
 	static Connect cct= new Connect();
@@ -63,52 +68,19 @@ public class VLogin extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(true);
-		/* Por si la ventana peta para comprobar el login a la app y que los comprueba con la bd
-		Scanner s = new Scanner(System.in);
-		System.out.println("Usuario: ");//admin
-		String NickName = s.nextLine();
 		
-		System.out.println("Contraseña: ");//adminadmin
-		String password = s.nextLine();
-		s.close();
-		try {
-		conn= DriverManager.getConnection("jdbc:sqlite:Database/SecuoiaDDBB.db");
-		PreparedStatement stmt2 = conn.prepareStatement("SELECT Nickname FROM User WHERE Nickname=? AND Password = ?");
-		//PreparedStatement psn = conn.prepareStatement(null); //NickName
-		stmt2.setString(1, NickName);
-		stmt2.setString(2, password);
-
-		
-		ResultSet rs =stmt2.executeQuery();
-		if(rs.next()) 
-		{
-			System.out.println("Login OK");
-			System.out.println("Login");
-			frame.dispose();
-			VMain window = new VMain();
-			window.ventanaMain.setVisible(true);
-		} else 
-		{
-			System.out.println("Error");
-		}
-		}catch(Exception f) 
-		{
-			System.out.println("Disconected");
-		}
-		 	*/
-		passwordField = new JPasswordField();
-		passwordField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 200, (frame.getWidth()/2), 40);
-	//	passwordField.setBounds(x, y, width, height);
-		frame.getContentPane().add(passwordField);
+		passF = new JPasswordField();
+		passF.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 200, (frame.getWidth()/2), 40);
+		frame.getContentPane().add(passF);
 		
 		JLabel LPassword = new JLabel("Password");
 		LPassword.setBounds((frame.getWidth()/2)-30, 154, 100, 40);
 		frame.getContentPane().add(LPassword);
 		
-		textField = new JTextField();
-		textField.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 98, (frame.getWidth()/2), 40);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		loginF = new JTextField();
+		loginF.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 98, (frame.getWidth()/2), 40);
+		frame.getContentPane().add(loginF);
+		loginF.setColumns(10);
 		
 		JLabel LName = new JLabel("NickName");
 		LName.setBounds((frame.getWidth()/2)-30, 51, 100, 40);
@@ -120,11 +92,19 @@ public class VLogin extends JFrame{
 		
 		BLogin.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e) 
-			{
-			
-			}
+			public void actionPerformed(ActionEvent e){
+			@SuppressWarnings("deprecation")
+			User user = new User(loginF.getText(), passF.getText());
+			boolean verificado = RegisterUser.searchUser(user);
+			System.out.println("The user is: " + verificado);
+			if (verificado) {
+				user = RegisterUser.completeUser(user);
+				VMain vM = new VMain(user);
+				vM.ventanaMain.setVisible(true);
+				frame.dispose();
+			} 
 		}
+	}
 		);
 		
 		JProgressBar barra = new JProgressBar();
