@@ -1,6 +1,8 @@
 package ddbb;
 
 import java.sql.*;
+
+import classes.User;
 import ddbbcon.*;
 import windows.*;
 
@@ -10,8 +12,10 @@ public class RegisterUser
 	static connect cct= new connect();
 	static Connection conn = cct.conect();
 	
-	public static void addUser() 
+	public static void addUser(User u) 
 	{
+		String nick = u.getNickName();
+		
 		String SQL = "INSERT INTO User(Nickname,Password,Email,Adress,CreditCard) VALUES(?,?,?,?,?)";
 		try 
 		{
