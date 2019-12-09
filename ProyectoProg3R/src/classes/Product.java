@@ -1,6 +1,8 @@
 package classes;
 
-public abstract class Product {
+import java.util.List;
+
+public class Product {
 	
 	protected int id;
 	protected String name;
@@ -10,11 +12,11 @@ public abstract class Product {
 	
 	public Product()
 	{
-		this.id = 0;
-		this.name = " ";
-		this.price = 0.0;
+		this.id = 1;
+		this.name = "Defecto";
+		this.price = 5.0;
 		this.desc = null;
-		this.mark = 0;
+		this.mark = 10;
 	}
 	
 	
@@ -76,5 +78,7 @@ public abstract class Product {
 	{
 		this.mark = mark;
 	}
+
+
 	 
 }
