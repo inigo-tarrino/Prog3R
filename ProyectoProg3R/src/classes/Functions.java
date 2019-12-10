@@ -45,7 +45,7 @@ public class Functions {
 			System.out.println("Insert description: ");
 			String desc = sc.next();
 			
-			Product p = new Product(id, name, price, desc, 0) {
+			Product p = new Product(id, name, price, desc) {
 			};
 			
 			ProdList.add(p);
@@ -54,7 +54,7 @@ public class Functions {
 			System.out.println("Item added");
 			System.out.println("The product added is: ["+ProdList.get(i-1).getId()+", "+
 			ProdList.get(i-1).getName()+", "+ProdList.get(i-1).getPrize()+", "+
-			ProdList.get(i-1).getDesc()+", "+ProdList.get(i-1).getMark()+"] ");
+			ProdList.get(i-1).getDesc()+", "+"] ");
 			}
 		}
 		else

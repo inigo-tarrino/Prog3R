@@ -20,13 +20,12 @@ public class Product {
 	}
 	
 	
-	public Product(int id, String name, double prize, String desc, int mark)
+	public Product(int id, String name, double prize, String desc)
 	{
 		this.id = id;
 		this.name = name;
 		this.price = prize;
 		this.desc = desc;
-		this.mark = mark;
 	}
 
 	public int getId()
@@ -69,15 +68,6 @@ public class Product {
 		this.desc = desc;
 	}
 
-	public int getMark() 
-	{
-		return mark;
-	}
-
-	public void setMark(int mark)
-	{
-		this.mark = mark;
-	}
 
 
 	 
