@@ -54,8 +54,8 @@ public class Cart
     }
     public static void main(String[] args) {
     	Product p = new Product();
-    	Product p1 = new Product(2,"Epri",4," ",5);
-    	Product p2 = new Product(3,"Colacao",5," ",5);
+    	Product p1 = new Product(2,"Epri",4," ");
+    	Product p2 = new Product(3,"Colacao",5," ");
     	addProd(p);
     	addProd(p1);
     	addProd(p2);

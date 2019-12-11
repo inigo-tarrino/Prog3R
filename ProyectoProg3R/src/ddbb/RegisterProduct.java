@@ -15,14 +15,16 @@ public class RegisterProduct
 	Connection conn = cct.conect();
 	public void addProduct() 
 	{
-		String SQL = "INSERT INTO product(P_ID,P_Name,P_Type,P_Price,P_Mark) VALUES(?,?,?,?,?)";
+		//INSERT INTO product (id, name, prize, desc) VALUES (0001, "Teclado", 95.90, "Teclado Mecánico");
+		
+		String SQL = "INSERT INTO product (id, name, prize, desc) VALUES(?,?,?,?)";
 		try 
 		{
 			PreparedStatement psid = conn.prepareStatement(SQL); //P_ID
 			psid.setString(1, null);
 			PreparedStatement psn = conn.prepareStatement(SQL); //P_Name
 			psn.setString(2, windows.WAddProduct.tFName.getName());
-			PreparedStatement psp = conn.prepareStatement(SQL); //P_Type
+			PreparedStatement psp = conn.prepareStatement(SQL); //P_Desc
 			psp.setString(3, windows.WAddProduct.tFDesc.getName());
 			PreparedStatement pse = conn.prepareStatement(SQL); //P_Price
 			pse.setString(4, windows.WAddProduct.tFPrice.getName());

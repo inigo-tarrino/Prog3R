@@ -20,7 +20,7 @@ public class Prod_merger {
 	    //
 	        
 	        for (int i=0; i < 5/*productNames.length*/; i++) {
-	            this.products.add(new Product(i+1, "", 5, null, i));
+	            this.products.add(new Product(i+1, "", 5, null));
 	            //Mejorponer todo el stock que tengamos en este metodo en los
 	            //array de arriba y que este for los recorra
 	        }

@@ -97,7 +97,7 @@ public class VMain {
 //				pShop.setLayout(null);
 				
 				try {
-					String query = "SELECT * FROM product";
+					String query = "SELECT name, prize, desc FROM product";
 					PreparedStatement pst = conn.prepareStatement(query);
 					ResultSet rs = pst.executeQuery();
 					
