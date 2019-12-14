@@ -3,6 +3,7 @@ package ddbb;
 import java.sql.*;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 
 import classes.User;
 import ddbbcon.*;
@@ -38,12 +39,15 @@ public class RegisterUser
 		}
 	}
 	
-	public static boolean searchUser(User u) {
-		String SQL = "SELECT * FROM user";
+	public static boolean searchUser(User u) throws SQLException {
+		String SQL = "SELECT Nickname, Password FROM user WHERE Nickname= ? AND Password= ?";
+		PreparedStatement stmt = conn.prepareStatement(SQL);
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(SQL);
-			while (rs.next()) {
+			stmt.setString(1, u.getNickName());
+			stmt.setString(2, u.getPass());
+			stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
 				System.out.println(rs.getString(1));
 				if (u.getNickName().equals(rs.getString("Nickname"))) {
 					System.out.println("User exists");

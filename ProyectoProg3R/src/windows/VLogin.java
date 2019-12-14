@@ -87,6 +87,7 @@ public class VLogin extends JFrame{
 		frame.getContentPane().add(LName);
 		
 		JButton BLogin = new JButton("Login");
+		BLogin.setFocusPainted(false);
 		BLogin.setBounds((frame.getWidth()/2)-125, 279, 110, 25);
 		frame.getContentPane().add(BLogin);
 		
@@ -95,8 +96,17 @@ public class VLogin extends JFrame{
 			public void actionPerformed(ActionEvent e){
 			@SuppressWarnings("deprecation")
 			User user = new User(loginF.getText(), passF.getText());
-			boolean verificado = RegisterUser.searchUser(user);
+			boolean verificado = false;
+			try {
+				verificado = RegisterUser.searchUser(user);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			System.out.println("The user is: " + verificado);
+			if(verificado==false) {
+				JOptionPane.showMessageDialog(null, "Please enter a valid user");
+			}
 			if (verificado) {
 				user = RegisterUser.completeUser(user);
 				VMain vM = new VMain(user);
@@ -113,6 +123,7 @@ public class VLogin extends JFrame{
 		
 		JButton BSignup = new JButton("SignUp");
 		BSignup.setBounds((frame.getWidth()/2)+15, 279, 110, 25);
+		BSignup.setFocusPainted(false);
 		frame.getContentPane().add(BSignup);
 		
 		BSignup.addActionListener(new ActionListener()
