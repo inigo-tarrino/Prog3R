@@ -1,6 +1,8 @@
 package ddbb;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -69,6 +71,37 @@ public class RegisterUser
 			return false;
 		}
 		return false;
+	}
+	
+	public static HashMap<String, String> RememberUser (User us) {
+		String SQL = "SELECT * FROM login";
+		boolean exists = false;
+		HashMap<String, String> users = new HashMap<>();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL);
+			if(rs.next() ) {
+				//System.out.println(rs.getString(1) + " " + rs.getString(2));
+				users.put(rs.getString(1), rs.getString(2));
+				if ( rs.getString(1).equals(us.getNickName()) ) {
+					if(rs.getString(2).equals(us.getPass())) {
+						exists = true;
+					}
+				}
+			}
+			System.out.println(exists);
+			if(!exists) {
+				String query = "INSERT INTO login VALUES (? , ?)";
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, us.getNickName());
+				pstmt.setString(2, us.getPass());
+				pstmt.executeUpdate();
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return users;
 	}
 	
 	public static User completeUser(User user) {
