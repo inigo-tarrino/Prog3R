@@ -1,5 +1,7 @@
 package windows;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import ddbbcon.Connect;
 
@@ -13,11 +15,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import classes.User;
@@ -25,6 +30,8 @@ import ddbb.RegisterUser;
 
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JCheckBox;
 
 public class VLogin extends JFrame{
 
@@ -32,6 +39,8 @@ public class VLogin extends JFrame{
 	private JTextField loginF;
 	private JPasswordField passF;
 	protected long i;
+	private JCheckBox chckbxRememberUser;
+	private HashMap<String , String> us;
 
 	static Connect cct= new Connect();
 	static Connection conn = cct.conect();
@@ -75,12 +84,15 @@ public class VLogin extends JFrame{
 		
 		JLabel LPassword = new JLabel("Password");
 		LPassword.setBounds((frame.getWidth()/2)-30, 154, 100, 40);
+		LPassword.setOpaque(false);
 		frame.getContentPane().add(LPassword);
 		
 		loginF = new JTextField();
 		loginF.setBounds((frame.getWidth()/2)-(frame.getWidth()/4), 98, (frame.getWidth()/2), 40);
 		frame.getContentPane().add(loginF);
 		loginF.setColumns(10);
+		
+		
 		
 		JLabel LName = new JLabel("NickName");
 		LName.setBounds((frame.getWidth()/2)-30, 51, 100, 40);
@@ -90,6 +102,7 @@ public class VLogin extends JFrame{
 		BLogin.setFocusPainted(false);
 		BLogin.setBounds((frame.getWidth()/2)-125, 279, 110, 25);
 		frame.getContentPane().add(BLogin);
+
 		
 		BLogin.addActionListener(new ActionListener()
 		{
@@ -109,6 +122,11 @@ public class VLogin extends JFrame{
 			}
 			if (verificado) {
 				user = RegisterUser.completeUser(user);
+				//TODO Guardar Informacion
+				if(chckbxRememberUser.isSelected()) {
+					us = RegisterUser.RememberUser(user);
+				}
+								
 				VMain vM = new VMain(user);
 				vM.ventanaMain.setVisible(true);
 				frame.dispose();
@@ -116,15 +134,33 @@ public class VLogin extends JFrame{
 		}
 	}
 		);
-		
+		// No hace nada, es inutil :D
 		JProgressBar barra = new JProgressBar();
-		barra.setBounds(0, 330, 578, 14);
+		//barra.setBounds(0, 330, 578, 14);
 		frame.getContentPane().add(barra);
 		
 		JButton BSignup = new JButton("SignUp");
 		BSignup.setBounds((frame.getWidth()/2)+15, 279, 110, 25);
 		BSignup.setFocusPainted(false);
 		frame.getContentPane().add(BSignup);
+		
+		chckbxRememberUser = new JCheckBox("Remember User");
+		chckbxRememberUser.setBounds(450, 281, 117, 21);
+		frame.getContentPane().add(chckbxRememberUser);
+		
+		JButton usRegis = new JButton("");
+		usRegis.setBounds(461, 107, 22, 21);
+		frame.getContentPane().add(usRegis);
+		
+		usRegis.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventanaRemember vr = new ventanaRemember();
+				vr.setVisible(true);
+				
+			}
+		});
 		
 		BSignup.addActionListener(new ActionListener()
 		{
@@ -139,5 +175,25 @@ public class VLogin extends JFrame{
 		
 		});
 		
+	}
+	class ventanaRemember extends JFrame{
+		/**
+		 * Eneko Valero 20/12/2019
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ventanaRemember() {
+			this.setSize(400 , 100);
+			this.setTitle("Registered Users");
+			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			this.setLocationRelativeTo(null);
+			
+			//////
+			String[] menuItems = { "Ping", "Traceroute", "Netstat", "Dig" };
+			JList<String> list = new JList<String>(menuItems);
+			JScrollPane scrollPane = new JScrollPane(list);
+			
+			getContentPane().add(scrollPane , BorderLayout.CENTER);
+		}
 	}
 }

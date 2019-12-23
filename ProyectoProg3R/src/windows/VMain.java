@@ -1,7 +1,6 @@
 package windows;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -13,13 +12,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+import classes.JLabelFoto;
 import classes.User;
 import ddbbcon.Connect;
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JScrollPane;
 import java.sql.*;
+import javax.swing.JLabel;
 
 public class VMain {
 
@@ -31,6 +33,7 @@ public class VMain {
 	private final Action actionPreferences = new SwingActionPreferences();
 	private JTable table;
 	private User usuario;
+	private JLabelFoto lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -101,8 +104,9 @@ public class VMain {
 					PreparedStatement pst = conn.prepareStatement(query);
 					ResultSet rs = pst.executeQuery();
 					
-					table.setModel(DbUtils.resultSetToTableModel(rs));
 					
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.setDefaultEditor(Object.class, null);
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -159,6 +163,7 @@ public class VMain {
 		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
 		
+<<<<<<< HEAD
 		JButton bAddToCart = new JButton("Add to Cart");
 		bAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,6 +191,12 @@ public class VMain {
 		});
 		bCart.setBounds(10, 193, 250, 50);
 		pBotonera.add(bCart);
+=======
+		String path = "";
+		lblNewLabel = new JLabelFoto("foto");
+		lblNewLabel.setBounds(47, 335, 165, 162);
+		pBotonera.add(lblNewLabel);
+>>>>>>> branch 'master' of https://github.com/inigo-tarrino/Prog3R.git
 		
 		JScrollPane scrollShop = new JScrollPane();
 		scrollShop.setBounds(372, 36, 884, 581);
@@ -193,6 +204,39 @@ public class VMain {
 		
 		table = new JTable();
 		scrollShop.setViewportView(table);
+		Thread row = new Thread () {
+			@Override
+			public void run () {
+				while(table.isEnabled()) {
+					//System.out.println("W");
+					if(table.getSelectedRow() < 0) {
+						lblNewLabel.setText("");
+					}
+					else {
+						String table_id = table.getValueAt(table.getSelectedRow(), 0).toString();
+						//System.out.println(table_id);
+						//lblNewLabel.setText(""+table_id);
+						try {
+							String query = "SELECT image FROM product where name = ? ";
+							
+							PreparedStatement pst = conn.prepareStatement(query);
+							pst.setString(1, table_id);
+							ResultSet rs = pst.executeQuery();
+							if(rs.next()) {
+								lblNewLabel.setText(rs.getString(1));
+								lblNewLabel.setPath(rs.getString(1));
+								lblNewLabel.PutImage();
+								//System.out.println(rs.getString(1));
+							}
+						}catch (Exception e) {
+							System.out.println(e);
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		};
+		row.start();
 	}
 	private class SwingActionHome extends AbstractAction {
 		public SwingActionHome() {
