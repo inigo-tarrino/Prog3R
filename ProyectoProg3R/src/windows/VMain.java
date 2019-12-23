@@ -159,6 +159,34 @@ public class VMain {
 		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
 		
+		JButton bAddToCart = new JButton("Add to Cart");
+		bAddToCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		bAddToCart.setBounds(10, 132, 250, 50);
+		pBotonera.add(bAddToCart);
+		
+		JButton bCart = new JButton("Cart");
+		bCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String query = "SELECT name, prize, desc FROM cart";
+					PreparedStatement pst = conn.prepareStatement(query);
+					ResultSet rs = pst.executeQuery();
+					
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		bCart.setBounds(10, 193, 250, 50);
+		pBotonera.add(bCart);
+		
 		JScrollPane scrollShop = new JScrollPane();
 		scrollShop.setBounds(372, 36, 884, 581);
 		ventanaMain.getContentPane().add(scrollShop);
