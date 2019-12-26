@@ -163,7 +163,7 @@ public class VMain {
 		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
 		
-<<<<<<< HEAD
+
 		JButton bAddToCart = new JButton("Add to Cart");
 		bAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,12 +191,12 @@ public class VMain {
 		});
 		bCart.setBounds(10, 193, 250, 50);
 		pBotonera.add(bCart);
-=======
+
 		String path = "";
 		lblNewLabel = new JLabelFoto("foto");
 		lblNewLabel.setBounds(47, 335, 165, 162);
 		pBotonera.add(lblNewLabel);
->>>>>>> branch 'master' of https://github.com/inigo-tarrino/Prog3R.git
+
 		
 		JScrollPane scrollShop = new JScrollPane();
 		scrollShop.setBounds(372, 36, 884, 581);

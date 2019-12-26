@@ -3,6 +3,14 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Aquí a la vez que añadirlo al ArrayList hay que hacer que haga una sentencia SQL para meter los datos en la BD en la tabla cart para así poder mostrarla
+ * Cuando se haga la "compra" ponemos que haga un "delete from..." y así se vacía el carrito
+ * La tabla cart es igual que la de producto pero se usa para cargar solo lo que haya en el carrito
+ * @author ander
+ *
+ */
+
 public class Cart
 {
 
