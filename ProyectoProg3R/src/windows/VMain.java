@@ -173,6 +173,7 @@ public class VMain {
 		bAddToCart.setBounds(10, 132, 250, 50);
 		pBotonera.add(bAddToCart);
 		
+		//boton cart
 		JButton bCart = new JButton("Cart");
 		bCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
