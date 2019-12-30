@@ -1,14 +1,22 @@
 package classes;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
+
+import ddbbcon.Connect;
 
 public class Functions {
 
 	private static Scanner sc;
 	private static Map<String, User> usersList;
 	User newUser = null;
+	static Connect cct= new Connect();
+	static Connection conn = cct.conect();
 
 	public static void addUser(User newUser) {
 		usersList.put(newUser.getNickName(), newUser);
@@ -16,6 +24,27 @@ public class Functions {
 	
 	public Map<String, User> getUsersList() throws IOException{
 		return Functions.usersList;
+	}
+	
+	public static Product get_producto(String nom) throws SQLException {
+		String sql = "SELECT * FROM product WHERE name = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		try {
+			stmt.setString(1, nom);
+			ResultSet res = stmt.executeQuery();
+			Product p = new Product();
+			p.setId( res.getInt(1) );
+			p.setName(nom);
+			p.setPrize(res.getDouble(3));
+			p.setDesc(res.getString(4));
+			return p;
+		}catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+			Product p = new Product();
+			return p;
+		}
+		
 	}
 	
 	public static void main(String[] args) throws IOException {

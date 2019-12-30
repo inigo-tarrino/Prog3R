@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -15,7 +17,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import classes.Cart;
+import classes.Functions;
 import classes.JLabelFoto;
+import classes.Product;
 import classes.User;
 import ddbbcon.Connect;
 import net.proteanit.sql.DbUtils;
@@ -31,10 +36,12 @@ public class VMain {
 	private final Action actionAccount = new SwingActionAccount();
 	private final Action actionHistory = new SwingActionHistory();
 	private final Action actionPreferences = new SwingActionPreferences();
-	private JTable tableShop;
-	private JTable tableCart;
+	private JTable table;
 	private User usuario;
 	private JLabelFoto lblNewLabel;
+	protected static Cart cart = new Cart();
+	private int indice;
+	private String table_id;
 
 	/**
 	 * Launch the application.
@@ -54,8 +61,6 @@ public class VMain {
 
 	Connect cct= new Connect();
 	Connection conn = null;
-
-
 	/**
 	 * Create the application.
 	 */
@@ -74,12 +79,13 @@ public class VMain {
 		ventanaMain.setBounds(100, 100, 1280, 720);
 		ventanaMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventanaMain.getContentPane().setLayout(null);
-
+		ventanaMain.setLocationRelativeTo(null);
+		
 		JPanel pBotonera= new JPanel();
 		pBotonera.setBounds(0, 0, 350, 698);
 		ventanaMain.getContentPane().add(pBotonera);
 		pBotonera.setLayout(null);
-
+		
 		JButton bHome = new JButton("Home");
 		bHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,35 +99,35 @@ public class VMain {
 		bHome.setBounds(10, 10, 250, 50);
 		bHome.setFocusPainted(false);
 		pBotonera.add(bHome);
-
+		
 		JButton bShop = new JButton("Shop");
 		bShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//				JPanel pShop = new JPanel();
-				//				pShop.setBounds(0, 0, 360, 900);
-				//				ventanaMain.getContentPane().add(pShop);
-				//				pShop.setLayout(null);
-
+//				JPanel pShop = new JPanel();
+//				pShop.setBounds(0, 0, 360, 900);
+//				ventanaMain.getContentPane().add(pShop);
+//				pShop.setLayout(null);
+				
 				try {
 					String query = "SELECT name, prize, desc FROM product";
 					PreparedStatement pst = conn.prepareStatement(query);
-					ResultSet rs = pst.executeQuery(query);
-
-
-					tableShop.setModel(DbUtils.resultSetToTableModel(rs));
-					tableShop.setDefaultEditor(Object.class, null);
-
+					ResultSet rs = pst.executeQuery();
+					
+					
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.setDefaultEditor(Object.class, null);
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
+				
 			}
 		});
 		bShop.setAction(actionShop);
 		bShop.setBounds(10, 70, 250, 50);
 		bShop.setFocusPainted(false);
 		pBotonera.add(bShop);
-
+		
 		JButton bAccount = new JButton("Account");
 		bAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,7 +143,7 @@ public class VMain {
 		bAccount.setBounds(10, 510, 250, 50);
 		bAccount.setFocusPainted(false);
 		pBotonera.add(bAccount);
-
+		
 		JButton bHistory = new JButton("History");
 		bHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,7 +157,7 @@ public class VMain {
 		bHistory.setBounds(10, 570, 250, 50);
 		bHistory.setFocusPainted(false);
 		pBotonera.add(bHistory);
-
+		
 		JButton bPreferences = new JButton("Preferences");
 		bPreferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,76 +171,83 @@ public class VMain {
 		bPreferences.setBounds(10, 630, 250, 50);
 		bPreferences.setFocusPainted(false);
 		pBotonera.add(bPreferences);
-
-
-		JButton bAddToCart = new JButton("Add to Cart");
-		bAddToCart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				try {
-					String query = "INSERT INTO cart (id, name, prize, desc)  VALUES (" + 
-				//conseguir los datos de la JTable de la tienda y meterlos en la de cart
-				")";
-							
-					PreparedStatement pst = conn.prepareStatement(query);
-					ResultSet rs = pst.executeQuery(query);
-
-				}catch (Exception e2) {
-					
-				}
-
-			}
-		});
-		bAddToCart.setBounds(10, 132, 250, 50);
-		pBotonera.add(bAddToCart);
-
-		//boton cart
-		JButton bCart = new JButton("Cart");
-		bCart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					String query = "SELECT name, prize, desc FROM cart";
-					PreparedStatement pst = conn.prepareStatement(query);
-					ResultSet rs = pst.executeQuery(query);
-
-					tableShop.setModel(DbUtils.resultSetToTableModel(rs));
-
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		bCart.setBounds(10, 193, 250, 50);
-		pBotonera.add(bCart);
-
+		
 		String path = "";
 		lblNewLabel = new JLabelFoto("foto");
 		lblNewLabel.setBounds(47, 335, 165, 162);
 		pBotonera.add(lblNewLabel);
-
-
+		
+		JButton btnaddCart = new JButton("+Add Cart");
+		btnaddCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//System.out.println(indice);
+				try {
+					Product pr = Functions.get_producto(table_id);
+					//System.out.println(pr.getName());
+					cart.addProd(pr);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("No se ha podido hacer el producto");
+				}
+			}
+		});
+		btnaddCart.setFocusPainted(false);
+		btnaddCart.setBounds(10, 131, 250, 50);
+		pBotonera.add(btnaddCart);
+		
+		JButton btnCart = new JButton("Cart");
+		
+		btnCart.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int ind = cart.get_Size();
+				System.out.println("//////////");
+				for (int i = 0; i < ind; i++) {
+					System.out.println(cart.getProduct(i).getName());
+				}
+				System.out.println( cart.get_Prize() );
+				System.out.println("//////////");
+				
+				Point loc = new Point(ventanaMain.getLocation().x - 200 , ventanaMain.getLocation().y );
+				Cart_window cr = new Cart_window(loc , cart.get_product_array() , cart.get_Prize());
+				cr.setVisible(true);
+			}
+		});
+		btnCart.setFocusPainted(false);
+		btnCart.setBounds(10, 192, 250, 50);
+		pBotonera.add(btnCart);
+		
+		/////// add to cart //////
+		
+		
+		
+		////////////////////////
+		
 		JScrollPane scrollShop = new JScrollPane();
 		scrollShop.setBounds(372, 36, 884, 581);
 		ventanaMain.getContentPane().add(scrollShop);
 		
-		tableShop = new JTable();
-		scrollShop.setViewportView(tableShop);
+		table = new JTable();
+		scrollShop.setViewportView(table);
 		Thread row = new Thread () {
 			@Override
 			public void run () {
-				while(tableShop.isEnabled()) {
+				while(table.isEnabled()) {
 					//System.out.println("W");
-					if(tableShop.getSelectedRow() < 0) {
+					if(table.getSelectedRow() < 0) {
 						lblNewLabel.setText("");
 					}
 					else {
-						String table_id = tableShop.getValueAt(tableShop.getSelectedRow(), 0).toString();
-						//System.out.println(table_id);
+						table_id = table.getValueAt(table.getSelectedRow(), 0).toString();
+						indice = table.getSelectedRow();
+						//System.out.println(indice);
 						//lblNewLabel.setText(""+table_id);
 						try {
 							String query = "SELECT image FROM product where name = ? ";
-
+							
 							PreparedStatement pst = conn.prepareStatement(query);
 							pst.setString(1, table_id);
 							ResultSet rs = pst.executeQuery();
@@ -253,48 +266,6 @@ public class VMain {
 			}
 		};
 		row.start();
-		
-		JScrollPane scrollCart = new JScrollPane();
-		scrollCart.setBounds(372, 36, 884, 581);
-		ventanaMain.getContentPane().add(scrollCart);
-		
-		tableCart = new JTable();
-		scrollCart.setViewportView(tableCart);
-		Thread row1 = new Thread () {
-			@Override
-			public void run () {
-				while(tableCart.isEnabled()) {
-					//System.out.println("W");
-					if(tableShop.getSelectedRow() < 0) {
-						lblNewLabel.setText("");
-					}
-					else {
-						String table_id = tableCart.getValueAt(tableCart.getSelectedRow(), 0).toString();
-						//System.out.println(table_id);
-						//lblNewLabel.setText(""+table_id);
-						try {
-							String query = "SELECT image FROM product where name = ? ";
-
-							PreparedStatement pst = conn.prepareStatement(query);
-							pst.setString(1, table_id);
-							ResultSet rs = pst.executeQuery();
-							if(rs.next()) {
-								lblNewLabel.setText(rs.getString(1));
-								lblNewLabel.setPath(rs.getString(1));
-								lblNewLabel.PutImage();
-								//System.out.println(rs.getString(1));
-							}
-						}catch (Exception e) {
-							System.out.println(e);
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		};
-		row1.start();
-
-		
 	}
 	private class SwingActionHome extends AbstractAction {
 		public SwingActionHome() {

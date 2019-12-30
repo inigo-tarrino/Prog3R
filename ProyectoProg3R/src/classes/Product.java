@@ -10,13 +10,8 @@ public class Product {
 	protected String desc;
 	protected int mark; //NOTA: del 0 al 5
 	
-	public Product()
-	{
-		this.id = 1;
-		this.name = "Defecto";
-		this.price = 5.0;
-		this.desc = null;
-		this.mark = 10;
+	public Product () {
+		
 	}
 	
 	
