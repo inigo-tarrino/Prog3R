@@ -15,8 +15,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -35,6 +40,7 @@ import javax.swing.JCheckBox;
 
 public class VLogin extends JFrame{
 
+	static Logger log;
 	JFrame frame;
 	private JTextField loginF;
 	private JPasswordField passF;
@@ -64,6 +70,20 @@ public class VLogin extends JFrame{
 	 * Create the application.
 	 */
 	public VLogin() {
+		//Generating the log
+	
+		try 
+		{
+			log = Logger.getLogger("LoginLog");
+			Handler h = new FileHandler("Login.xml");
+			
+			log.addHandler(h);
+			log.setLevel(Level.FINEST);
+			h.setLevel(Level.FINEST);
+		} catch (Exception e) {
+			System.err.println("Not log file found");
+		}
+		log.log(Level.INFO,"AppInicialized on" +(new Date()));
 		initialize();
 	}
 
