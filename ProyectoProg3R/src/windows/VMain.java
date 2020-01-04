@@ -177,7 +177,7 @@ public class VMain {
 		lblNewLabel.setBounds(47, 335, 165, 162);
 		pBotonera.add(lblNewLabel);
 		
-		JButton btnaddCart = new JButton("+Add Cart");
+		JButton btnaddCart = new JButton("Add to Cart");
 		btnaddCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//System.out.println(indice);
@@ -208,11 +208,11 @@ public class VMain {
 				for (int i = 0; i < ind; i++) {
 					System.out.println(cart.getProduct(i).getName());
 				}
-				System.out.println( cart.get_Prize() );
+				System.out.println(cart.get_Prize());
 				System.out.println("//////////");
 				
-				Point loc = new Point(ventanaMain.getLocation().x - 200 , ventanaMain.getLocation().y );
-				Cart_window cr = new Cart_window(loc , cart.get_product_array() , cart.get_Prize());
+				Point loc = new Point(ventanaMain.getLocation().x - 200 , ventanaMain.getLocation().y);
+				Cart_window cr = new Cart_window(loc, cart.get_product_array(), cart.get_Prize());
 				cr.setVisible(true);
 			}
 		});
@@ -220,11 +220,6 @@ public class VMain {
 		btnCart.setBounds(10, 192, 250, 50);
 		pBotonera.add(btnCart);
 		
-		/////// add to cart //////
-		
-		
-		
-		////////////////////////
 		
 		JScrollPane scrollShop = new JScrollPane();
 		scrollShop.setBounds(372, 36, 884, 581);
@@ -270,7 +265,7 @@ public class VMain {
 	private class SwingActionHome extends AbstractAction {
 		public SwingActionHome() {
 			putValue(NAME, "Home");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
@@ -278,7 +273,7 @@ public class VMain {
 	private class SwingActionShop extends AbstractAction {
 		public SwingActionShop() {
 			putValue(NAME, "Shop");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
@@ -286,7 +281,7 @@ public class VMain {
 	private class SwingActionAccount extends AbstractAction {
 		public SwingActionAccount() {
 			putValue(NAME, "Account");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
@@ -294,7 +289,7 @@ public class VMain {
 	private class SwingActionHistory extends AbstractAction {
 		public SwingActionHistory() {
 			putValue(NAME, "History");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
@@ -302,7 +297,7 @@ public class VMain {
 	private class SwingActionPreferences extends AbstractAction {
 		public SwingActionPreferences() {
 			putValue(NAME, "Preferences");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}

@@ -45,7 +45,6 @@ public class VLogin extends JFrame{
 	private JTextField loginF;
 	private JPasswordField passF;
 	protected long i;
-	private JCheckBox chckbxRememberUser;
 	private HashMap<String , String> us;
 
 	static Connect cct= new Connect();
@@ -143,9 +142,9 @@ public class VLogin extends JFrame{
 			if (verificado) {
 				user = RegisterUser.completeUser(user);
 				//TODO Guardar Informacion
-				if(chckbxRememberUser.isSelected()) {
-					us = RegisterUser.RememberUser(user);
-				}
+//				if(chckbxRememberUser.isSelected()) {
+//					us = RegisterUser.RememberUser(user);
+//				}
 								
 				VMain vM = new VMain(user);
 				vM.ventanaMain.setVisible(true);
@@ -163,24 +162,6 @@ public class VLogin extends JFrame{
 		BSignup.setBounds((frame.getWidth()/2)+15, 279, 110, 25);
 		BSignup.setFocusPainted(false);
 		frame.getContentPane().add(BSignup);
-		
-		chckbxRememberUser = new JCheckBox("Remember User");
-		chckbxRememberUser.setBounds(450, 281, 117, 21);
-		frame.getContentPane().add(chckbxRememberUser);
-		
-		JButton usRegis = new JButton("");
-		usRegis.setBounds(461, 107, 22, 21);
-		frame.getContentPane().add(usRegis);
-		
-		usRegis.addActionListener( new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ventanaRemember vr = new ventanaRemember();
-				vr.setVisible(true);
-				
-			}
-		});
 		
 		BSignup.addActionListener(new ActionListener()
 		{
