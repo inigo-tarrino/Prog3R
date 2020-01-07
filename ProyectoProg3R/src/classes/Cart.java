@@ -1,5 +1,6 @@
 package classes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class Cart
      
      public double update_prize() {
     	 double prec = 0.0;
+    	 DecimalFormat df = new DecimalFormat("#.##");
     	 for (Product p : cart) {
     		 prec += p.getPrize();
+    		 df.format(prec);
     	 }
     	 return prec;
      }

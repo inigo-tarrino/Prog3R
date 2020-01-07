@@ -4,6 +4,7 @@ package windows;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -45,12 +46,18 @@ public class Cart_window extends JFrame{
 		scrollPane.setViewportView(list);
 		
 		lblNewLabel = new JLabel();
-		lblNewLabel.setBounds(111, 356, 83, 14);
+		lblNewLabel.setBounds(10, 355, 118, 16);
 		getContentPane().add(lblNewLabel);
 		
 		JButton btnDelete = new JButton("DELETE");
-		btnDelete.setBounds(48, 400, 89, 23);
+		btnDelete.setFocusPainted(false);
+		btnDelete.setBounds(49, 430, 92, 23);
 		getContentPane().add(btnDelete);
+		
+		JButton btnConfirm = new JButton("CONFIRM");
+		btnConfirm.setFocusPainted(false);
+		btnConfirm.setBounds(49, 397, 92, 23);
+		getContentPane().add(btnConfirm);
 		
 		///////////////////////
 		
@@ -65,6 +72,32 @@ public class Cart_window extends JFrame{
 				if(in != -1) {
 					listModel.remove(in);
 					VMain.cart.remove_item(in);
+				}
+			}
+		});
+		
+		btnConfirm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(list.getModel().getSize() == 0) {
+					JOptionPane.showMessageDialog(null, "There has to be something in the cart");
+				}else {
+					int val = list.getModel().getSize();
+					PrintWriter writer = null;
+					try {
+						writer = new PrintWriter("Purchase.txt");
+						writer.println(val);
+						for (int i = 0; i < val; i++) {
+							writer.println(list.getModel().getElementAt(i));
+						}
+						JOptionPane.showMessageDialog(null, "Purchase confirmed! Check Purchase.txt");
+					}catch(Exception ex) {
+						System.out.println(""+ex);
+					}finally {
+						writer.close();
+					}
+					System.out.println("Compra Realizada");
 				}
 			}
 		});

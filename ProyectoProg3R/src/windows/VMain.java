@@ -27,6 +27,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import java.sql.*;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class VMain {
 
@@ -214,6 +215,7 @@ public class VMain {
 				Point loc = new Point(ventanaMain.getLocation().x - 200 , ventanaMain.getLocation().y);
 				Cart_window cr = new Cart_window(loc, cart.get_product_array(), cart.get_Prize());
 				cr.setVisible(true);
+				JOptionPane.showMessageDialog(null, "Select the products you want to buy");
 			}
 		});
 		btnCart.setFocusPainted(false);
