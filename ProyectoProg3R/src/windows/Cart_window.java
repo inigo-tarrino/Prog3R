@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import classes.Functions;
 import classes.Product;
 
 
@@ -80,25 +81,7 @@ public class Cart_window extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(list.getModel().getSize() == 0) {
-					JOptionPane.showMessageDialog(null, "There has to be something in the cart");
-				}else {
-					int val = list.getModel().getSize();
-					PrintWriter writer = null;
-					try {
-						writer = new PrintWriter("Purchase.txt");
-						writer.println(val);
-						for (int i = 0; i < val; i++) {
-							writer.println(list.getModel().getElementAt(i));
-						}
-						JOptionPane.showMessageDialog(null, "Purchase confirmed! Check Purchase.txt");
-					}catch(Exception ex) {
-						System.out.println(""+ex);
-					}finally {
-						writer.close();
-					}
-					System.out.println("Compra Realizada");
-				}
+			Functions.writeToFile("src/UsersPurchases/Purchase.txt", listModel);
 			}
 		});
 		

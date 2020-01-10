@@ -1,5 +1,6 @@
 package classes;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import ddbbcon.Connect;
 
@@ -88,6 +92,28 @@ public class Functions {
 		}
 		else
 		System.out.println("Not Enought permissions to do that");
+	}
+	
+	public static void writeToFile(String path, DefaultListModel listModel) {
+		if(listModel.getSize() == 0) {
+			JOptionPane.showMessageDialog(null, "There has to be something in the cart");
+		}else {
+			int val = listModel.getSize();
+			PrintWriter writer = null;
+			try {
+				writer = new PrintWriter(path);
+				writer.println(val);
+				for (int i = 0; i < val; i++) {
+					writer.println(listModel.getElementAt(i));
+				}
+				JOptionPane.showMessageDialog(null, "Purchase confirmed! Check Purchase.txt");
+			}catch(Exception ex) {
+				System.out.println(""+ex);
+			}finally {
+				writer.close();
+			}
+			System.out.println("Compra Realizada");
+		}
 	}
 }
 
