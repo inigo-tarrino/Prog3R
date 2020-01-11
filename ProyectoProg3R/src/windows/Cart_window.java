@@ -5,12 +5,16 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 import classes.Functions;
 import classes.Product;
+import classes.User;
 
 
 public class Cart_window extends JFrame{
@@ -20,8 +24,10 @@ public class Cart_window extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	public JLabel lblNewLabel;
+	private User usua;
 	
-	public Cart_window(Point dim , ArrayList<Product> prods , double prec) {
+	public Cart_window(Point dim , ArrayList<Product> prods , double prec , User usuario) {
+		usua = usuario;
 		setTitle("Cart");
 		setSize(200 , 500);
 		setLocation(dim.x , dim.y);
@@ -79,9 +85,22 @@ public class Cart_window extends JFrame{
 		
 		btnConfirm.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("unchecked")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			Functions.writeToFile("src/UsersPurchases/Purchase.txt", listModel);
+				String path = "Users/"+usua.getNickName();
+				boolean ok =Functions.directory(path);
+				System.out.println(ok);
+				try {
+					DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+					Date date = new Date(System.currentTimeMillis());
+					String path2 = path+"/"+dateFormat.format(date)+".txt";
+					System.out.println(path2);
+					Functions.writeToFile(path2, list);
+				}catch (Exception e2) {
+					System.out.println(e2);
+					System.out.println("Couldn't create the file");
+				}
 			}
 		});
 		

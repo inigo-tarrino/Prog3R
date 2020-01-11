@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -147,11 +148,20 @@ public class VMain {
 		
 		JButton bHistory = new JButton("History");
 		bHistory.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanel pHistory = new JPanel();
-				pHistory.setBounds(0, 0, 360, 900);
-				ventanaMain.getContentPane().add(pHistory);
-				pHistory.setLayout(null);
+				// TODO Auto-generated method stub
+				String path = "Users/"+usuario.getNickName();
+				Functions.loadFiles(path);
+				VHistory vhi;
+				try {
+					vhi = new VHistory(path);
+					vhi.setVisible(true);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		bHistory.setAction(actionHistory);
@@ -213,7 +223,7 @@ public class VMain {
 				System.out.println("//////////");
 				
 				Point loc = new Point(ventanaMain.getLocation().x - 200 , ventanaMain.getLocation().y);
-				Cart_window cr = new Cart_window(loc, cart.get_product_array(), cart.get_Prize());
+				Cart_window cr = new Cart_window(loc, cart.get_product_array(), cart.get_Prize() , usuario);
 				cr.setVisible(true);
 				JOptionPane.showMessageDialog(null, "Select the products you want to buy");
 			}

@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import classes.User;
+import ddbb.RegisterUser;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -58,6 +60,7 @@ public class VProfile extends JFrame {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws SQLException 
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -90,7 +93,16 @@ public class VProfile extends JFrame {
 		panel_prin.add(panel_labels , BorderLayout.SOUTH);
 		
 	
+		String path;
 		JLP = new JLabelProfile();
+		try {
+			path = RegisterUser.get_profile_image(Nick_txt.getText(), e_mail_txt.getText());
+			JLP.setIcon(new ImageIcon(path));
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		JLP.setToolTipText("Click to add a profile image");
 		JLP.setBorder( BorderFactory.createLineBorder(Color.BLACK));
 		panel_prin.add(JLP , BorderLayout.CENTER);
@@ -123,6 +135,12 @@ public class VProfile extends JFrame {
 					File selectedFile = file.getSelectedFile();
 					String path = selectedFile.getAbsolutePath();
 					JLP.setIcon(ResizeImage(path));
+					try {
+						RegisterUser.storePhoto(path, Nick_txt.getText(), e_mail_txt.getText());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if (result == JFileChooser.CANCEL_OPTION) {
 					JOptionPane.showMessageDialog(null, "No file selected");

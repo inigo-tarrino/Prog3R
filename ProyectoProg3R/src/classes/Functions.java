@@ -1,15 +1,19 @@
 package classes;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import ddbbcon.Connect;
@@ -94,17 +98,22 @@ public class Functions {
 		System.out.println("Not Enought permissions to do that");
 	}
 	
-	public static void writeToFile(String path, DefaultListModel listModel) {
-		if(listModel.getSize() == 0) {
+	public static void writeToFile(String path, JList lista) {
+		if(lista.getModel().getSize() == 0) {
 			JOptionPane.showMessageDialog(null, "There has to be something in the cart");
 		}else {
-			int val = listModel.getSize();
+			int val = lista.getModel().getSize();
 			PrintWriter writer = null;
 			try {
 				writer = new PrintWriter(path);
+				;
+				SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss z");
+				Date date = new Date(System.currentTimeMillis());
+
+				writer.println( formatter.format(date) );
 				writer.println(val);
 				for (int i = 0; i < val; i++) {
-					writer.println(listModel.getElementAt(i));
+					writer.println(lista.getModel().getElementAt(i));
 				}
 				JOptionPane.showMessageDialog(null, "Purchase confirmed! Check Purchase.txt");
 			}catch(Exception ex) {
@@ -114,6 +123,23 @@ public class Functions {
 			}
 			System.out.println("Compra Realizada");
 		}
+	}
+	public static boolean directory(String path) {
+		File dir = new File(path);
+		boolean ok = dir.mkdir();
+		if(!ok) { return false;} else {return true;}
+	}
+	public static ArrayList<File> loadFiles(String path) {
+		File dir = new File(path);
+		File[] directoryListing = dir.listFiles();
+		ArrayList<File> arr = new ArrayList<File>();
+		if( directoryListing != null ) {
+			for(File child : directoryListing) {
+				System.out.println(child.toString());
+				arr.add(child);
+			}
+		}
+		return arr;
 	}
 }
 
