@@ -7,15 +7,11 @@ import ddbbcon.Connect;
 
 import windows.*;
 
-public class RegisterProduct 
-{
+public class RegisterProduct{
 
-	//Conection with ddbb
 	Connect cct= new Connect();
 	Connection conn = cct.conect();
-	public void addProduct() 
-	{
-		//INSERT INTO product (id, name, prize, desc) VALUES (0001, "Teclado", 95.90, "Teclado Mecánico");
+	public void addProduct(){
 		
 		String SQL = "INSERT INTO product (id, name, prize, desc) VALUES(?,?,?,?)";
 		try 

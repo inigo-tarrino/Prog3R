@@ -105,17 +105,11 @@ public class VMain {
 		JButton bShop = new JButton("Shop");
 		bShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				JPanel pShop = new JPanel();
-//				pShop.setBounds(0, 0, 360, 900);
-//				ventanaMain.getContentPane().add(pShop);
-//				pShop.setLayout(null);
-				
 				try {
 					String query = "SELECT name, prize, desc FROM product";
 					PreparedStatement pst = conn.prepareStatement(query);
 					ResultSet rs = pst.executeQuery();
-					
-					
+					//DBUtils crea la tabla de los productos.
 					table.setModel(DbUtils.resultSetToTableModel(rs));
 					table.setDefaultEditor(Object.class, null);
 					
@@ -151,7 +145,7 @@ public class VMain {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//Crea una carpeta por cada usuario.
 				String path = "Users/"+usuario.getNickName();
 				Functions.loadFiles(path);
 				VHistory vhi;
@@ -159,7 +153,6 @@ public class VMain {
 					vhi = new VHistory(path);
 					vhi.setVisible(true);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -191,15 +184,13 @@ public class VMain {
 		JButton btnaddCart = new JButton("Add to Cart");
 		btnaddCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//System.out.println(indice);
 				try {
-					Product pr = Functions.get_producto(table_id);
-					//System.out.println(pr.getName());
+					//Busca el producto en la base de datos y lo añade al Array.
+					Product pr = Functions.getProduct(table_id);
 					cart.addProd(pr);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-					System.out.println("No se ha podido hacer el producto");
+					System.out.println("The product could not be created.");
 				}
 			}
 		});
@@ -213,7 +204,7 @@ public class VMain {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//Abre el carrito de compra.
 				int ind = cart.get_Size();
 				System.out.println("//////////");
 				for (int i = 0; i < ind; i++) {
@@ -243,18 +234,15 @@ public class VMain {
 			@Override
 			public void run () {
 				while(table.isEnabled()) {
-					//System.out.println("W");
 					if(table.getSelectedRow() < 0) {
 						lblNewLabel.setText("");
 					}
 					else {
 						table_id = table.getValueAt(table.getSelectedRow(), 0).toString();
 						indice = table.getSelectedRow();
-						//System.out.println(indice);
-						//lblNewLabel.setText(""+table_id);
 						try {
+							//Hilo que pone los productos de la base de datos en la lista.
 							String query = "SELECT image FROM product where name = ? ";
-							
 							PreparedStatement pst = conn.prepareStatement(query);
 							pst.setString(1, table_id);
 							ResultSet rs = pst.executeQuery();
@@ -262,7 +250,6 @@ public class VMain {
 								lblNewLabel.setText(rs.getString(1));
 								lblNewLabel.setPath(rs.getString(1));
 								lblNewLabel.PutImage();
-								//System.out.println(rs.getString(1));
 							}
 						}catch (Exception e) {
 							System.out.println(e);

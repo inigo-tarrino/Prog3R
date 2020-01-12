@@ -11,27 +11,24 @@ import classes.User;
 import ddbbcon.*;
 import windows.*;
 
-public class RegisterUser
-{
+public class RegisterUser{
 	
-	//Conection with ddbb
 	static Connect cct= new Connect();
 	static Connection conn = cct.conect();
 	
-	
-	public static void addUser(User u) 
-	{
+	public static void addUser(User u){
+		
 		String nick = u.getNickName();
 		String pass = u.getPass();
 		String email = u.getEmail();
-		
-		try {
+		try{
 		int ad;
 		if(!u.isAdmin()){
 			ad = 0;
 		}else {
 			ad = 1;
 		}
+		
 		Statement stmt = conn.createStatement();
 		String SQL = "INSERT INTO user (NickName, Password, Email, Admin) VALUES ('" + nick + "','" + pass + "','" + email + "','" + ad + "')";
 		stmt.executeUpdate(SQL);
@@ -40,6 +37,8 @@ public class RegisterUser
 			e.printStackTrace();
 		}
 	}
+	
+	/** Funcion que busca un usuario en la base de datos y lo comprueba */
 	
 	public static boolean searchUser(User u) throws SQLException {
 		String SQL = "SELECT Nickname, Password FROM user WHERE Nickname= ? AND Password= ?";
@@ -104,7 +103,8 @@ public class RegisterUser
 		}
 		return -1;
 	}
-	
+	/**Función que busca el usuario 
+	 * para recordarlo en el login (Sin Implementar)*/
 	public static HashMap<String, String> RememberUser (User us) {
 		String SQL = "SELECT * FROM login";
 		boolean exists = false;
@@ -113,7 +113,6 @@ public class RegisterUser
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(SQL);
 			if(rs.next() ) {
-				//System.out.println(rs.getString(1) + " " + rs.getString(2));
 				users.put(rs.getString(1), rs.getString(2));
 				if ( rs.getString(1).equals(us.getNickName()) ) {
 					if(rs.getString(2).equals(us.getPass())) {
@@ -135,7 +134,8 @@ public class RegisterUser
 		}
 		return users;
 	}
-	
+	/** Función que busca el 
+	 * usuario completo en la bd.*/
 	public static User completeUser(User user) {
 		String SQL = "SELECT * FROM user";
 		try {
@@ -160,6 +160,8 @@ public class RegisterUser
 		}
 		return user;
 	}
+	/**Función que busca la foto 
+	 * del perfil en la base de datos.*/
 	public static void storePhoto (String path , String name , String email) throws SQLException {
 		String SQL = "Update user set profilePhoto = ? where ID = ?";
 		int user_id = searchUser_by_name(name, email);
@@ -200,7 +202,10 @@ public class RegisterUser
 			System.out.println("Error");
 		}
 	}
-	public static String get_profile_image (String name , String email) throws SQLException {
+	/**Funcion que busca la 
+	 * foto de perfil en 
+	 * la base de datos.*/
+	public static String getProfileImage (String name , String email) throws SQLException {
 		String SQL = "select profilePhoto from user where ID = ?";
 		int user_id = searchUser_by_name(name, email);
 		try {

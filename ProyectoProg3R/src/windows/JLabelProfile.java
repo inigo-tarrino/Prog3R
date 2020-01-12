@@ -10,7 +10,7 @@ public class JLabelProfile extends JLabel {
 		setSize(500 , 300);
 	}
 
-	public void Meter_img (String ruta) {
+	public void addImg (String ruta) {
 		//TODO
 		setIcon( new ImageIcon(ruta));
 	}

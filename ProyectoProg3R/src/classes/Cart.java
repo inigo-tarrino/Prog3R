@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Clase del carrito de la compra*/
+
 public class Cart
 {
 

@@ -13,6 +13,9 @@ import java.sql.Connection;
 
 public class Connect {
 
+	/** Clase que crea la conexion 
+	 * a la base de datos */
+	
 	private Connection conn = null;
 	
 	public Connection conect()

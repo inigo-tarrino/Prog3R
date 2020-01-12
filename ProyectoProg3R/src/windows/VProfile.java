@@ -96,10 +96,9 @@ public class VProfile extends JFrame {
 		String path;
 		JLP = new JLabelProfile();
 		try {
-			path = RegisterUser.get_profile_image(Nick_txt.getText(), e_mail_txt.getText());
+			path = RegisterUser.getProfileImage(Nick_txt.getText(), e_mail_txt.getText());
 			JLP.setIcon(new ImageIcon(path));
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -109,7 +108,6 @@ public class VProfile extends JFrame {
 		
 		frame.getContentPane().add(panel_prin);
 		
-		////////
 		JLP.addMouseListener( new MouseListener() {
 			
 			@Override
@@ -126,6 +124,7 @@ public class VProfile extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//Buscador de archivos para la foto de perfil.
 				JFileChooser file = new JFileChooser();
 				file.setCurrentDirectory(new File(System.getProperty("user.home")));
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "gif", "png");
@@ -138,7 +137,6 @@ public class VProfile extends JFrame {
 					try {
 						RegisterUser.storePhoto(path, Nick_txt.getText(), e_mail_txt.getText());
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -150,7 +148,7 @@ public class VProfile extends JFrame {
 		
 		
 	}
-	
+	//Función que escala la imagen del perfil.
 	public ImageIcon ResizeImage(String path) {
 		ImageIcon myImage = new ImageIcon(path);
 		Image img = myImage.getImage();
@@ -158,6 +156,7 @@ public class VProfile extends JFrame {
 		ImageIcon image = new ImageIcon(newImg);
 		return image;
 	}
+	//Función que coge el usuario y el email y lo pone en la ventana del perfil.
 	public void showData() throws SQLException, ClassNotFoundException{
 		String sql = "SELECT NickName, Email FROM user WHERE NickName=? AND Email=?;";
 		PreparedStatement stmt = conn.prepareStatement(sql);

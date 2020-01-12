@@ -104,11 +104,13 @@ public class VentanaSignUp {
 		btnSU.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Valida los campos de la ventana.
 				validateNickName(TFnn, "Please enter a nickname");
 				validatePassword(TFpass, "please enter a valid password (must be 8 or more characters)");
 				validateEmail(TFemail);
 				@SuppressWarnings("deprecation")
 				User u = new User(TFnn.getText(), TFpass.getText(), TFemail.getText(), chckbxAdmin.isSelected());
+				//Añade el usuario u a la base de datos.
 				ddbb.RegisterUser.addUser(u);
 				frame.dispose();
 				VMain vM = new VMain(u);
@@ -141,6 +143,9 @@ public class VentanaSignUp {
 			}
 		});
 	}
+	/**Funciones de 
+	 * validación de 
+	 * los campos */
 	
 	public boolean validateNickName(JTextField TFnn, String errormsg){
 	  if (TFnn.getText().equals("")) {

@@ -49,9 +49,7 @@ public class VLogin extends JFrame{
 
 	static Connect cct= new Connect();
 	static Connection conn = cct.conect();
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -69,20 +67,18 @@ public class VLogin extends JFrame{
 	 * Create the application.
 	 */
 	public VLogin() {
-		//Generating the log
-	
-		try 
-		{
+		//Generando el log
+		try {
 			log = Logger.getLogger("LoginLog");
 			Handler h = new FileHandler("Login.xml");
 			
 			log.addHandler(h);
 			log.setLevel(Level.FINEST);
 			h.setLevel(Level.FINEST);
-		} catch (Exception e) {
+		}catch (Exception e){
 			System.err.println("Not log file found");
 		}
-		log.log(Level.INFO,"AppInicialized on" +(new Date()));
+		log.log(Level.INFO,"App Inicialized on" +(new Date()));
 		initialize();
 	}
 
@@ -123,16 +119,16 @@ public class VLogin extends JFrame{
 		frame.getContentPane().add(BLogin);
 
 		
-		BLogin.addActionListener(new ActionListener()
-		{
+		BLogin.addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e){
 			@SuppressWarnings("deprecation")
 			User user = new User(loginF.getText(), passF.getText());
 			boolean verificado = false;
-			try {
+			try{
+				//Busca el usuario introducido el la base de datos.
 				verificado = RegisterUser.searchUser(user);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
+			}catch (SQLException e1){
 				e1.printStackTrace();
 			}
 			System.out.println("The user is: " + verificado);
@@ -140,12 +136,8 @@ public class VLogin extends JFrame{
 				JOptionPane.showMessageDialog(null, "Please enter a valid user");
 			}
 			if (verificado) {
-				user = RegisterUser.completeUser(user);
-				//TODO Guardar Informacion
-//				if(chckbxRememberUser.isSelected()) {
-//					us = RegisterUser.RememberUser(user);
-//				}
-								
+				//Recoge todos los datos del usuario para pasarlos luego a otras ventanas.
+				user = RegisterUser.completeUser(user);			
 				VMain vM = new VMain(user);
 				vM.ventanaMain.setVisible(true);
 				frame.dispose();
@@ -153,7 +145,6 @@ public class VLogin extends JFrame{
 		}
 	}
 		);
-		// No hace nada, es inutil :D
 		JProgressBar barra = new JProgressBar();
 		//barra.setBounds(0, 330, 578, 14);
 		frame.getContentPane().add(barra);
@@ -163,8 +154,8 @@ public class VLogin extends JFrame{
 		BSignup.setFocusPainted(false);
 		frame.getContentPane().add(BSignup);
 		
-		BSignup.addActionListener(new ActionListener()
-		{
+		BSignup.addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e) 
 				{
 					System.out.println("Signup");
@@ -177,10 +168,9 @@ public class VLogin extends JFrame{
 		});
 		
 	}
+	
 	class ventanaRemember extends JFrame{
-		/**
-		 * Eneko Valero 20/12/2019
-		 */
+		
 		private static final long serialVersionUID = 1L;
 
 		public ventanaRemember() {
@@ -189,7 +179,6 @@ public class VLogin extends JFrame{
 			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			this.setLocationRelativeTo(null);
 			
-			//////
 			String[] menuItems = { "Ping", "Traceroute", "Netstat", "Dig" };
 			JList<String> list = new JList<String>(menuItems);
 			JScrollPane scrollPane = new JScrollPane(list);

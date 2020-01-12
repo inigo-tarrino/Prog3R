@@ -20,14 +20,15 @@ import classes.User;
 public class Cart_window extends JFrame{
 
 	/**
-	 * 
+	 * Clase de la ventana 
+	 * del carrito de compra.
 	 */
 	private static final long serialVersionUID = 1L;
 	public JLabel lblNewLabel;
-	private User usua;
+	private User us;
 	
 	public Cart_window(Point dim , ArrayList<Product> prods , double prec , User usuario) {
-		usua = usuario;
+		us = usuario;
 		setTitle("Cart");
 		setSize(200 , 500);
 		setLocation(dim.x , dim.y);
@@ -46,6 +47,7 @@ public class Cart_window extends JFrame{
 		DefaultListModel listModel = new DefaultListModel();
 		list.setModel(listModel);
 		
+		//Añade los productos del ArrayList a la lista.
 		for (int i = 0; i < prods.size(); i++) {
 			listModel.addElement( prods.get(i).getName() + " " + prods.get(i).getPrize() + " €" );
 		}
@@ -66,13 +68,11 @@ public class Cart_window extends JFrame{
 		btnConfirm.setBounds(49, 397, 92, 23);
 		getContentPane().add(btnConfirm);
 		
-		///////////////////////
-		
 		btnDelete.addActionListener( new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//Borra el indice de la lista seleccionado.
 				System.out.println(list.getModel().getSize());
 				int in = list.getSelectedIndex();
 				System.out.println(in);
@@ -85,17 +85,18 @@ public class Cart_window extends JFrame{
 		
 		btnConfirm.addActionListener(new ActionListener() {
 			
-			@SuppressWarnings("unchecked")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String path = "Users/"+usua.getNickName();
-				boolean ok =Functions.directory(path);
+				String path = "Users/"+us.getNickName();
+				//Crea el directorio con el path de arriba.
+				boolean ok = Functions.createDirectory(path);
 				System.out.println(ok);
 				try {
 					DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 					Date date = new Date(System.currentTimeMillis());
 					String path2 = path+"/"+dateFormat.format(date)+".txt";
 					System.out.println(path2);
+					//Escribe en el fichero con el path y la lista del carrito.
 					Functions.writeToFile(path2, list);
 				}catch (Exception e2) {
 					System.out.println(e2);
@@ -104,7 +105,10 @@ public class Cart_window extends JFrame{
 			}
 		});
 		
-		Thread update_data = new Thread() {
+		/** Hilo que actualiza el precio del carrito 
+		 * en tiempo real al borrar un articulo */
+		
+		Thread updateData = new Thread() {
 			@Override
 			public void run () {
 				while(this.isAlive()) {
@@ -113,7 +117,7 @@ public class Cart_window extends JFrame{
 				}
 			}
 		};
-		update_data.start();
+		updateData.start();
 		
 		
 		

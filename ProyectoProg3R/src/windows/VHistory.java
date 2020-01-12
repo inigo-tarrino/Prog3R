@@ -19,6 +19,10 @@ public class VHistory extends JFrame {
 	/**
 	 * 
 	 * Eneko Valero
+	 * 
+	 * Clase que muestra 
+	 * los tickets de 
+	 * compra de cada usuario.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -33,38 +37,36 @@ public class VHistory extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds( 0 , 0 , 720 , 410 );
 		JList list = new JList();
-		list.setBorder(BorderFactory.createLineBorder(Color.red));
 		scrollPane.setViewportView(list);
 		
 		DefaultListModel model = new DefaultListModel();
 		list.setModel(model);
-		//TODO Añadir cositas
 		ArrayList<File> array = Functions.loadFiles(dir);
 		
-		for( File f : array ) {
+		//Lee las lineas de los ficheros.
+		for(File f : array) {
 			BufferedReader br = new BufferedReader(new FileReader(f));
 			String line = br.readLine();
 			model.addElement(line);
 		}
 		
-		JButton openFile = new JButton( "Open File :D" );
-		openFile.setBounds( 0 , 410 , 370 , 40 );
+		JButton openFile = new JButton( "Open Ticket" );
+		openFile.setBounds( 0 , 410 , 706 , 33 );
 		openFile.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				int object_position = list.getSelectedIndex();
-				if( object_position < 0 ) {
+				int ticketPosition = list.getSelectedIndex();
+				if(ticketPosition < 0) {
 					JOptionPane.showMessageDialog(null, "You must select a ticket");
 				}else {
-					System.out.println(object_position);
-					File doc = array.get(object_position);
-					Desktop fileTOopen = Desktop.getDesktop();
+					System.out.println(ticketPosition);
+					//Busca el path del fichero y lo abre con la clase de java Desktop.
+					File doc = array.get(ticketPosition);
+					Desktop fileToOpen = Desktop.getDesktop();
 					try {
-						fileTOopen.open(doc);
+						fileToOpen.open(doc);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -76,14 +78,4 @@ public class VHistory extends JFrame {
 		
 	}
 	
-	public static void main(String[] args) {
-		VHistory vhi;
-		try {
-			vhi = new VHistory("Users/admin");
-			vhi.setVisible(true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
