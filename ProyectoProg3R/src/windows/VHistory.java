@@ -51,6 +51,7 @@ public class VHistory extends JFrame {
 		}
 		
 		JButton openFile = new JButton( "Open Ticket" );
+		openFile.setFocusPainted(false);
 		openFile.setBounds( 0 , 410 , 706 , 33 );
 		openFile.addActionListener(new ActionListener() {
 			

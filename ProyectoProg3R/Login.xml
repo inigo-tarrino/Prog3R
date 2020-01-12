@@ -2,15 +2,14 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2020-01-12T10:10:40.531665800Z</date>
-  <millis>1578823840531</millis>
-  <nanos>665800</nanos>
+  <date>2020-01-12T10:36:58.733798600Z</date>
+  <millis>1578825418733</millis>
+  <nanos>798600</nanos>
   <sequence>0</sequence>
   <logger>LoginLog</logger>
   <level>INFO</level>
   <class>windows.VLogin</class>
   <method>&lt;init&gt;</method>
   <thread>16</thread>
-  <message>App Inicialized onSun Jan 12 11:10:40 CET 2020</message>
+  <message>App Inicialized onSun Jan 12 11:36:58 CET 2020</message>
 </record>
-</log>
